@@ -5,7 +5,6 @@ import Home from "./pages/Home/Home";
 import Match from "./pages/Match/Match";
 import  Rule from "./pages/Rule/Rule";
 import Videotape from "./pages/Videotape/Videotape";
-import {scaleSizeH, scaleSizeW, setSpText} from "./utils/Screen";
 
 
 type Props = {};
@@ -32,9 +31,11 @@ export default class App extends Component<Props> {
                 //没选中的文字颜色
                 inactiveTintColor={"#ffffff"}
                 //标签栏样式
-                tabBarStyle={{scaleSizeH:scaleSizeH(120),borderTopWidth:0.3,borderColor:'#CCCCCC'}}
+                tabStyle={{paddingBottom:12,borderLeftWidth:0.3,borderColor:'#CCCCCC'}}
+                tabBarStyle={{borderTopWidth:0.3,borderColor:'#CCCCCC',alignItems:'center',justifyContent:'center'}}
                 //设置tab上的样式
-                labelStyle={{fontSize:setSpText(30),lineHeight:scaleSizeH(80),borderLeftWidth:0.3,borderColor:'#CCCCCC'}}>
+                labelStyle={{alignItems:'center',justifyContent:'center',fontSize:12}}
+                >
               <Scene key={"Home"} component={Home} initial={true} title="首页" />
               <Scene key={"Match"} component={Match} title="比赛"/>
               <Scene key={"Rule"} component={Rule} title="规则说明"/>
