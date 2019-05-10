@@ -1,21 +1,17 @@
 import React,{Component} from "react";
 import {View,Image,Text,StyleSheet,Button} from "react-native";
 import {scaleSizeH, scaleSizeW,setSpText} from "../../utils/Screen";
+import Details from "../static/Details";
+
 
 class Rule extends Component {
 
     render() {
         return (
             <View style={styles.box1}>
-
-                {/*顶部*/}
+                {/*顶部及登录*/}
                 <View style={styles.view1}>
-                    <View style={styles.log} >
-                        <Image style={styles.logimg} source={require('../../imagers/static/a1.png')}/>
-                    </View>
-                    <View style={styles.logUser}>
-                        <Image style={styles.userimg} source={require('../../imagers/static/index_user.png')}/>
-                    </View>
+                    <Details/>
                 </View>
 
                 <View style={styles.view2}>
@@ -52,27 +48,6 @@ const styles =StyleSheet.create( {
     image:{
         width:30,
         height:scaleSizeH(80),
-    },
-    log:{
-        flex:1,
-        justifyContent:'center'
-    },
-    logimg:{
-        width:scaleSizeW(410),
-        height:scaleSizeH(60),
-        marginLeft:scaleSizeW(15)
-    },
-    logUser:{
-        flexDirection:'row-reverse',
-        flex:1,
-        alignItems:'center',
-    },
-    userimg:{
-        width:scaleSizeW(80),
-        height:scaleSizeH(80),
-        marginRight:scaleSizeW(25),
-        borderWidth: 2,
-        borderColor: '#666666'
     },
     ruletxt:{
         color:'#FFFFFF',

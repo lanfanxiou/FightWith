@@ -1,18 +1,17 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View,Image} from 'react-native';
-import {Router,Scene,Tabs} from "react-native-router-flux";
+import {Router,Scene,Tabs,Actions} from "react-native-router-flux";
 import Home from "./pages/Home/Home";
 import Match from "./pages/Match/Match";
 import  Rule from "./pages/Rule/Rule";
-import Details from "./pages/Match/Details";
-
+import Videotape from "./pages/Videotape/Videotape";
 import {scaleSizeH, scaleSizeW, setSpText} from "./utils/Screen";
 
 
 type Props = {};
 export default class App extends Component<Props> {
 
-  render() {
+    render() {
     return (
         <Router>
           <Scene key={"root"} tabBarPosition={"bottom"} hideNavBar={true}>
@@ -40,7 +39,7 @@ export default class App extends Component<Props> {
               <Scene key={"Match"} component={Match} title="比赛"/>
               <Scene key={"Rule"} component={Rule} title="规则说明"/>
             </Tabs>
-              <Scene key={"Details"} component={Details} title="弹框"/>
+              <Scene key={"videotape"} component={Videotape} title="录像回播"/>
           </Scene>
         </Router>
     );

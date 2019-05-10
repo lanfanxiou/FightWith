@@ -2,6 +2,9 @@ import React,{Component} from "react";
 import {View,Image,Text,StyleSheet,FlatList,TouchableOpacity,ImageBackground} from "react-native";
 import {scaleSizeH, scaleSizeW, setSpText} from "../../utils/Screen";
 import Modal from "react-native-modal";
+import {Actions} from "react-native-router-flux";
+
+
 
 
 
@@ -19,7 +22,7 @@ class FlastList extends Component {
             soondate:'',
             soonres:''
         };
-        // this.over = this.over.bind(this);
+        this.toggleModal4 = this.toggleModal4.bind(this);
     }
 
     toggleModal = () => {
@@ -30,6 +33,15 @@ class FlastList extends Component {
     };
     toggleModal3 = () => {
         this.setState({ isModalVisible3: !this.state.isModalVisible3 });
+    };
+    toggleModal4() {
+        if(1==1){
+            this.setState({
+                isModalVisible:false
+            });
+            Actions.videotape();
+        }
+
     };
     _renderItemArticle=({item})=>{
         if(item.color==0){
@@ -195,7 +207,7 @@ class FlastList extends Component {
                                     <Text style={styles.mo_view2_2tex2}>{this.state.overdate}</Text>
                                 </View>
                                 <View style={styles.mo_view2_3}>
-                                    <TouchableOpacity>
+                                    <TouchableOpacity onPress={this.toggleModal4}>
                                         <View style={styles.mo_view2_4}>
                                             <Text style={styles.mo_view2_4tet}>录像回播</Text>
                                         </View>
