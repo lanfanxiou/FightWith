@@ -7,7 +7,16 @@ export default {
         "rule_description":"规则说明"
     },
     "Exhibition":{
-        "Distance start":'距离开赛'
+        "Distance start":'距离开赛',
+        "days":"天",
+        "hours":"小时",
+        "minutes":"分钟",
+        "seconds":"秒"
+    },
+    "Match":{
+        "name":"灵山巅峰对决 2019年05月01日",
+        "time":"请选择比赛日期",
+        "btu":"关闭"
     },
     "user_profile": {
         "title": "个人资料"

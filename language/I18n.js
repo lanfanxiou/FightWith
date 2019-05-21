@@ -2,8 +2,6 @@ import I18n,{ getLanguages } from 'react-native-i18n'
 import en from "./locales/en";
 import zh from "./locales/zh";
 
-I18n.defaultLocale = 'zh';
-
 I18n.fallbacks = true;
 
 I18n.translations = {
@@ -11,6 +9,7 @@ I18n.translations = {
     zh,
 };
 
+I18n.defaultLocale = 'zh';
 // I18n.localeLanguage = () => {
 // //
 // //

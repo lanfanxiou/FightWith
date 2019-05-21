@@ -6,6 +6,7 @@ import {Calendar} from 'react-native-calendars';
 import * as time from '../../utils/time.js'//引用js
 import {LocaleConfig} from 'react-native-calendars';
 import styles from "../../styles/Match_styles/Calenderstyles";
+import {I18n} from "../../language/I18n";
 
 
 LocaleConfig.locales['fr'] = {
@@ -22,8 +23,8 @@ class Calendar1 extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value:'灵山巅峰对决 2019年05月01日',
-            data:'请选择比赛日期',
+            value:I18n.t('Match.name'),
+            data:I18n.t('Match.time'),
             data2:time.monthDay,
             isModalVisible: false,
             selected:'',
@@ -86,7 +87,7 @@ class Calendar1 extends Component {
                                 }}
                             />
                             <Text style={{fontSize:setSpText(19),color:"#CCCCCC"}}>红点:有比赛 蓝点:比赛推迟</Text>
-                            <Button style={{marginBottom:0}} title="关闭" onPress={this.toggleModal} />
+                            <Button style={{marginBottom:0}} title={I18n.t('Match.btu')} onPress={this.toggleModal} />
                         </ScrollView>
                     </View>
                 </Modal>

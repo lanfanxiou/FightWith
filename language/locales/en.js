@@ -8,7 +8,16 @@ export default {
         "rule_description":"Rule Description"
     },
     "Exhibition":{
-        "Distance start":'Distance start'
+        "Distance start":'Distance start',
+        "days":"days",
+        "hours":":",
+        "minutes":":",
+        "seconds":" "
+    },
+    "Match":{
+        "name":"Lingshan Peak vs. May 01, 2019",
+        "time":"Please choose the date of the competition",
+        "btu":"Close"
     },
     "user_profile": {
         "title": "Your Profile"
