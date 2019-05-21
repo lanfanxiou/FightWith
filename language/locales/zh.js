@@ -18,6 +18,15 @@ export default {
         "time":"请选择比赛日期",
         "btu":"关闭"
     },
+    "Details":{
+        "Loginpanel":"登录面板",
+        "Account":"账号",
+        "name":"张三",
+        "Password":"密码",
+        "Verification":"验证码",
+        "picture":"图片",
+        "sure":"确定"
+    },
     "user_profile": {
         "title": "个人资料"
     },

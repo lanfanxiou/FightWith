@@ -19,6 +19,15 @@ export default {
         "time":"Please choose the date of the competition",
         "btu":"Close"
     },
+    "Details":{
+        "Loginpanel":"Login panel",
+        "Account":"Account number",
+        "name":"Zhang San",
+        "Password":"Password",
+        "Verification":"Verification Code",
+        "picture":"picture",
+        "sure":"OK"
+    },
     "user_profile": {
         "title": "Your Profile"
     },

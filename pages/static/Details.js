@@ -3,6 +3,7 @@ import {View, Image, Text, StyleSheet, Button, TouchableOpacity} from "react-nat
 import {scaleSizeH, scaleSizeW,setSpText} from "../../utils/Screen";
 import Modal from "react-native-modal";
 import styles from "../../styles/Static_styles/Staticstyles";
+import {I18n} from "../../language/I18n";
 
 
 
@@ -38,7 +39,7 @@ class Details extends Component {
                     <View style={styles.Hm_view1}>
                         <View style={styles.Hm_view2}>
                             <View style={styles.Hm_view4}>
-                                <Text style={styles.Hm_text2}>登录面板</Text>
+                                <Text style={styles.Hm_text2}>{I18n.t('Details.Loginpanel')}</Text>
                             </View>
                             <View style={styles.Hm_view4_1}>
                                 <TouchableOpacity onPress={() => this.setState({ isModalVisible: false })}>
@@ -52,17 +53,17 @@ class Details extends Component {
                                 <View style={styles.Hm_view5_2}>
                                     <View style={styles.Hm_view3}>
                                         <View style={styles.Hm_view3_1}>
-                                            <Text style={styles.Hm_text}>账号 </Text>
+                                            <Text style={styles.Hm_text}>{I18n.t('Details.Account')}</Text>
                                         </View>
                                         <View style={styles.Hm_view3_2}>
                                             <View style={styles.Hm_view3_3}>
-                                                <Text style={styles.Hm_text}>张三</Text>
+                                                <Text style={styles.Hm_text}>{I18n.t('Details.name')}</Text>
                                             </View>
                                         </View>
                                     </View>
                                     <View style={styles.Hm_view3}>
                                         <View style={styles.Hm_view3_1}>
-                                            <Text style={styles.Hm_text}>密码 </Text>
+                                            <Text style={styles.Hm_text}>{I18n.t('Details.Password')}</Text>
                                         </View>
                                         <View style={styles.Hm_view3_2}>
                                             <View style={styles.Hm_view3_3}>
@@ -72,14 +73,14 @@ class Details extends Component {
                                     </View>
                                     <View style={styles.Hm_view3}>
                                         <View style={styles.Hm_view3_1}>
-                                            <Text style={styles.Hm_text}>验证码 </Text>
+                                            <Text style={styles.Hm_text}>{I18n.t('Details.Verification')}</Text>
                                         </View>
                                         <View style={styles.Hm_view3_4}>
                                             <View style={styles.Hm_view3_5}>
                                                 <Text style={styles.Hm_text}>1234</Text>
                                             </View>
                                             <View style={styles.Hm_view3_6}>
-                                                <Text style={styles.Hm_text}>图片</Text>
+                                                <Text style={styles.Hm_text}>{I18n.t('Details.picture')}</Text>
                                             </View>
                                         </View>
                                     </View>
@@ -92,7 +93,7 @@ class Details extends Component {
                             <View style={styles.Hm_view6_2}>
                                 <TouchableOpacity>
                                     <View style={styles.Hm_view6_3}>
-                                        <Text style={styles.Hm_text2}>确定</Text>
+                                        <Text style={styles.Hm_text2}>{I18n.t('Details.sure')}</Text>
                                     </View>
                                 </TouchableOpacity>
                             </View>
