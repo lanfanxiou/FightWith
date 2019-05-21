@@ -6,7 +6,6 @@ import {I18n} from "../../language/I18n";
 
 
 {/*展示页*/}
-
 class Exhibition extends Component {
 
     constructor(props) {
@@ -38,10 +37,10 @@ class Exhibition extends Component {
                             century:"世纪",	//“世纪”分隔符
                             year:"年",		//“年”分隔符
                             month:"月",		//“月”分隔符
-                            day:"天",		//“日”分隔符
-                            hour:"小时",	//“时”分隔符
-                            minute:"分",	//“分”分隔符
-                            second:"秒"		//“秒”分隔符
+                            day:I18n.t('Exhibition.days'),		//“日”分隔符
+                            hour:I18n.t('Exhibition.hours'),	//“时”分隔符
+                            minute:I18n.t('Exhibition.minutes'),	//“分”分隔符
+                            second:I18n.t('Exhibition.seconds')		//“秒”分隔符
                         }} />
                         </Text> :null}
 
