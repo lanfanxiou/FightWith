@@ -3,12 +3,11 @@ import {View,Image,Text,StyleSheet,FlatList,TouchableOpacity,ImageBackground} fr
 import {scaleSizeH, scaleSizeW, setSpText} from "../../utils/Screen";
 import Modal from "react-native-modal";
 import {Actions} from "react-native-router-flux";
-
-
-
-
+import styles from "../../styles/Match_styles/FlastListstyles";
 
 class FlastList extends Component {
+
+    //支持红黄蓝数量
     constructor(props) {
         super(props);
         this.state = {
@@ -20,10 +19,126 @@ class FlastList extends Component {
             Conductdate:'',
             Conductres:'',
             soondate:'',
-            soonres:''
+            soonres:'',
+            tick:{
+                red:false, //red
+                yellow:false, //yellow
+                blue:false //blue
+            },
+            lightPillar:{
+                red:5,
+                yellow:15,
+                blue:30
+            },
+            ryb:3//比赛结果，123
         };
         this.toggleModal4 = this.toggleModal4.bind(this);
     }
+
+    //切换标记
+    switchover=(who)=>{
+        switch(who){
+            case "red":
+                if(this.state.tick.red){  //红色取消打勾
+                    let a=this.state.lightPillar.red-1;
+                    let b=this.state.lightPillar.yellow;
+                    let c=this.state.lightPillar.blue;
+                    this.setState({
+                        tick:{
+                            red:false
+                        },
+                        lightPillar:{
+                            red:a,
+                            yellow:b,
+                            blue:c
+                        }
+                    });
+                }else{  //红色打勾
+                    let a=this.state.lightPillar.red+1;
+                    let b=this.state.lightPillar.yellow;
+                    let c=this.state.lightPillar.blue;
+                    this.setState({
+                        tick:{
+                            red:true,
+                            yellow:false,
+                            blue:false
+                        },
+                        lightPillar:{
+                            red:a,
+                            yellow:b,
+                            blue:c
+                        }
+                    });
+                }
+                break;
+            case "yellow":
+                if(this.state.tick.yellow){  //黄色取消打勾
+                    let a=this.state.lightPillar.red;
+                    let b=this.state.lightPillar.yellow-1;
+                    let c=this.state.lightPillar.blue;
+                    this.setState({
+                        tick:{
+                            yellow:false
+                        },
+                        lightPillar:{
+                            red:a,
+                            yellow:b,
+                            blue:c
+                        }
+                    });
+                }else{  //黄色打勾
+                    let a=this.state.lightPillar.red;
+                    let b=this.state.lightPillar.yellow+1;
+                    let c=this.state.lightPillar.blue;
+                    this.setState({
+                        tick:{
+                            red:false,
+                            yellow:true,
+                            blue:false
+                        },
+                        lightPillar:{
+                            red:a,
+                            yellow:b,
+                            blue:c
+                        }
+                    });
+                }
+                break;
+            case "blue":
+                if(this.state.tick.blue){  //蓝色取消打勾
+                    let a=this.state.lightPillar.red;
+                    let b=this.state.lightPillar.yellow;
+                    let c=this.state.lightPillar.blue-1;
+                    this.setState({
+                        tick:{
+                            blue:false
+                        },
+                        lightPillar:{
+                            red:a,
+                            yellow:b,
+                            blue:c
+                        }
+                    });
+                }else{  //蓝色打勾
+                    let a=this.state.lightPillar.red;
+                    let b=this.state.lightPillar.yellow;
+                    let c=this.state.lightPillar.blue+1;
+                    this.setState({
+                        tick:{
+                            red:false,
+                            yellow:false,
+                            blue:true
+                        },
+                        lightPillar:{
+                            red:a,
+                            yellow:b,
+                            blue:c
+                        }
+                    });
+                }
+                break;
+        }
+    };
 
     toggleModal = () => {
         this.setState({ isModalVisible: !this.state.isModalVisible });
@@ -63,7 +178,7 @@ class FlastList extends Component {
                         <View style={styles.f_view2}>
                             <View style={{flex:1}}>
                                 <View style={styles.f_view3}>
-                                    <Image style={styles.image2} source={item.name1con}/>
+                                    <Image style={styles.image2} source={{uri:item.name1con}}/>
                                 </View>
                                 <View style={styles.f_view4}>
                                     <Text style={styles.f_view4tet}>{item.name1}</Text>
@@ -75,7 +190,7 @@ class FlastList extends Component {
                             </View>
                             <View style={{flex:1}}>
                                 <View style={styles.f_view6}>
-                                    <Image style={styles.image2} source={item.name2con}/>
+                                    <Image style={styles.image2} source={{uri:item.name2con}}/>
                                 </View>
                                 <View style={styles.f_view7}>
                                     <Text style={styles.f_view7tet}>{item.name2}</Text>
@@ -109,7 +224,7 @@ class FlastList extends Component {
                         <View style={styles.f_view2}>
                             <View style={{flex:1}}>
                                 <View style={styles.f_view3}>
-                                    <Image style={styles.image2} source={item.name1con}/>
+                                    <Image style={styles.image2} source={{uri:item.name1con}}/>
                                 </View>
                                 <View style={styles.f_view4}>
                                     <Text style={styles.f_view4tet}>{item.name1}</Text>
@@ -118,7 +233,7 @@ class FlastList extends Component {
                             <View style={styles.f_view5}></View>
                             <View style={{flex:1}}>
                                 <View style={styles.f_view6}>
-                                    <Image style={styles.image2} source={item.name2con}/>
+                                    <Image style={styles.image2} source={{uri:item.name2con}}/>
                                 </View>
                                 <View style={styles.f_view7}>
                                     <Text style={styles.f_view7tet}>{item.name2}</Text>
@@ -150,7 +265,7 @@ class FlastList extends Component {
                         <View style={styles.f_view2}>
                             <View style={{flex:1}}>
                                 <View style={styles.f_view3}>
-                                    <Image style={styles.image2} source={item.name1con}/>
+                                    <Image style={styles.image2} source={{uri:item.name1con}}/>
                                 </View>
                                 <View style={styles.f_view4}>
                                     <Text style={styles.f_view4tet}>{item.name1}</Text>
@@ -159,7 +274,7 @@ class FlastList extends Component {
                             <View style={styles.f_view5}></View>
                             <View style={{flex:1}}>
                                 <View style={styles.f_view6}>
-                                    <Image style={styles.image2} source={item.name2con}/>
+                                    <Image style={styles.image2} source={{uri:item.name2con}}/>
                                 </View>
                                 <View style={styles.f_view7}>
                                     <Text style={styles.f_view7tet}>{item.name2}</Text>
@@ -217,31 +332,67 @@ class FlastList extends Component {
                             <View style={styles.mo_view2_5}>
                                 <ImageBackground style={styles.usimg} source={require('../../imagers/Match/box1.jpg')}/>
                             </View>
+
+                            {/*支持度*/}
                             <View style={styles.mo_view2_6}>
                                 <View style={styles.mo_view2_6_1}>
-                                    <View style={styles.mo_view2_6_1_1}></View>
-                                    <View style={styles.mo_view2_6_1_2}></View>
-                                    <View style={styles.mo_view2_6_1_3}></View>
+                                    <View style={{...styles.mo_view2_6_1_1,flex:this.state.lightPillar.red}}>
+                                        {this.state.ryb==1?<Image source={require('../../imagers/Match/Selection.png')} style={styles.mo_view2_6img} />:null}
+                                    </View>
+                                    <View style={{...styles.mo_view2_6_1_2,flex:this.state.lightPillar.yellow}}>
+                                        {this.state.ryb==2?<Image source={require('../../imagers/Match/Selection.png')} style={styles.mo_view2_6img} />:null}
+                                    </View>
+                                    <View style={{...styles.mo_view2_6_1_3,flex:this.state.lightPillar.blue}}>
+                                        {this.state.ryb==3?<Image source={require('../../imagers/Match/Selection.png')} style={styles.mo_view2_6img} />:null}
+                                    </View>
                                 </View>
                             </View>
+
                         </View>
+
+                        {/*支持红黄蓝*/}
+
                         <View style={styles.mo_view3}>
                             <View style={styles.mo_view3_1}>
-                                <TouchableOpacity>
-                                     <View style={styles.mo_view3_2}>
-                                         <Text style={styles.mo_view3_2tet}>红</Text>
-                                    </View>
-                                </TouchableOpacity>
-                                <TouchableOpacity>
-                                    <View style={styles.mo_view3_3}>
-                                         <Text style={styles.mo_view3_3tet}>平</Text>
-                                    </View>
-                                </TouchableOpacity>
-                                <TouchableOpacity>
-                                    <View style={styles.mo_view3_4}>
-                                        <Text style={styles.mo_view3_4tet}>蓝</Text>
-                                    </View>
-                                </TouchableOpacity>
+                                <View style={styles.moview33_1_1} >
+                                    <Text style={styles.moview3_1_txt}>您的支持方</Text>
+                                </View>
+
+                                <View style={styles.mo_view3_1div}>
+                                    <TouchableOpacity onPress={()=>{
+                                        //执行打勾事件
+                                        this.switchover("red");
+
+                                        this.setState({ isModalVisible: false });
+                                    }}>
+                                        <View style={styles.mo_view3_2}>
+                                            <Text style={styles.mo_view3_2tet}>红</Text>
+                                            {this.state.tick.red&&<Image style={styles.square} source={require('../../imagers/Match/square1.png')} />}
+                                        </View>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={()=>{
+                                        //执行打勾事件
+                                        this.switchover("yellow");
+
+                                        this.setState({ isModalVisible: false });
+                                    }}>
+                                        <View style={styles.mo_view3_3}>
+                                            <Text style={styles.mo_view3_3tet}>平</Text>
+                                            {this.state.tick.yellow&&<Image style={styles.square} source={require('../../imagers/Match/square1.png')} />}
+                                        </View>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={()=>{
+                                        //执行打勾事件
+                                        this.switchover("blue");
+
+                                        this.setState({ isModalVisible: false });
+                                    }}>
+                                        <View style={styles.mo_view3_4}>
+                                            <Text style={styles.mo_view3_4tet}>蓝</Text>
+                                            {this.state.tick.blue&&<Image style={styles.square} source={require('../../imagers/Match/square1.png')} />}
+                                        </View>
+                                    </TouchableOpacity>
+                                </View>
                             </View>
                         </View>
                     </View>
@@ -266,29 +417,61 @@ class FlastList extends Component {
                             </View>
                             <View style={styles.mo_view2_6}>
                                 <View style={styles.mo_view2_6_1}>
-                                    <View style={styles.mo_view2_6_1_1}></View>
-                                    <View style={styles.mo_view2_6_1_2}></View>
-                                    <View style={styles.mo_view2_6_1_3}></View>
+                                    <View style={styles.mo_view2_6_1}>
+                                        <View style={{...styles.mo_view2_6_1_1,flex:this.state.lightPillar.red}}>
+                                            {/*{this.state.ryb==1?<Image source={require('../../imagers/Match/result.png')} style={styles.mo_view2_6img} />:null}*/}
+                                        </View>
+                                        <View style={{...styles.mo_view2_6_1_2,flex:this.state.lightPillar.yellow}}>
+                                            {/*{this.state.ryb==2?<Image source={require('../../imagers/Match/result.png')} style={styles.mo_view2_6img} />:null}*/}
+                                        </View>
+                                        <View style={{...styles.mo_view2_6_1_3,flex:this.state.lightPillar.blue}}>
+                                            {/*{this.state.ryb==3?<Image source={require('../../imagers/Match/result.png')} style={styles.mo_view2_6img} />:null}*/}
+                                        </View>
+                                    </View>
                                 </View>
                             </View>
                         </View>
-                        <View style={styles.mo_view3}>
+                        <View style={styles.mo_view33}>
                             <View style={styles.mo_view3_1}>
-                                <TouchableOpacity>
-                                    <View style={styles.mo_view3_2}>
-                                        <Text style={styles.mo_view3_2tet}>红</Text>
-                                    </View>
-                                </TouchableOpacity>
-                                <TouchableOpacity>
-                                    <View style={styles.mo_view3_3}>
-                                        <Text style={styles.mo_view3_3tet}>平</Text>
-                                    </View>
-                                </TouchableOpacity>
-                                <TouchableOpacity>
-                                    <View style={styles.mo_view3_4}>
-                                        <Text style={styles.mo_view3_4tet}>蓝</Text>
-                                    </View>
-                                </TouchableOpacity>
+                                <View style={styles.moview3_1_1} >
+                                    <Text style={styles.moview3_1_txt}>您的支持方</Text>
+                                </View>
+
+                                <View style={styles.mo_view3_1div}>
+                                    <TouchableOpacity onPress={()=>{
+                                        //执行打勾事件
+                                        this.switchover("red");
+
+                                        this.setState({ isModalVisible: false });
+                                    }}>
+                                        <View style={styles.mo_view3_2}>
+                                            <Text style={styles.mo_view3_2tet}>红</Text>
+                                            {this.state.tick.red&&<Image style={styles.square} source={require('../../imagers/Match/square1.png')} />}
+                                        </View>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={()=>{
+                                        //执行打勾事件
+                                        this.switchover("yellow");
+
+                                        this.setState({ isModalVisible: false });
+                                    }}>
+                                        <View style={styles.mo_view3_3}>
+                                            <Text style={styles.mo_view3_3tet}>平</Text>
+                                            {this.state.tick.yellow&&<Image style={styles.square} source={require('../../imagers/Match/square1.png')} />}
+                                        </View>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={()=>{
+                                        //执行打勾事件
+                                        this.switchover("blue");
+
+                                        this.setState({ isModalVisible: false });
+                                    }}>
+                                        <View style={styles.mo_view3_4}>
+                                            <Text style={styles.mo_view3_4tet}>蓝</Text>
+                                            {this.state.tick.blue&&<Image style={styles.square} source={require('../../imagers/Match/square1.png')} />}
+                                        </View>
+                                    </TouchableOpacity>
+                                </View>
                             </View>
                         </View>
                     </View>
@@ -313,29 +496,59 @@ class FlastList extends Component {
                             </View>
                             <View style={styles.mo_view2_6}>
                                 <View style={styles.mo_view2_6_1}>
-                                    <View style={styles.mo_view2_6_1_1}></View>
-                                    <View style={styles.mo_view2_6_1_2}></View>
-                                    <View style={styles.mo_view2_6_1_3}></View>
+                                    <View style={{...styles.mo_view2_6_1_1,flex:this.state.lightPillar.red}}>
+                                        {/*{this.state.ryb==1?<Image source={require('../../imagers/Match/result.png')} style={styles.mo_view2_6img} />:null}*/}
+                                    </View>
+                                    <View style={{...styles.mo_view2_6_1_2,flex:this.state.lightPillar.yellow}}>
+                                        {/*{this.state.ryb==2?<Image source={require('../../imagers/Match/result.png')} style={styles.mo_view2_6img} />:null}*/}
+                                    </View>
+                                    <View style={{...styles.mo_view2_6_1_3,flex:this.state.lightPillar.blue}}>
+                                        {/*{this.state.ryb==3?<Image source={require('../../imagers/Match/result.png')} style={styles.mo_view2_6img} />:null}*/}
+                                    </View>
                                 </View>
                             </View>
                         </View>
-                        <View style={styles.mo_view3}>
+                        <View style={styles.mo_view33}>
                             <View style={styles.mo_view3_1}>
-                                <TouchableOpacity>
-                                    <View style={styles.mo_view3_2}>
-                                        <Text style={styles.mo_view3_2tet}>红</Text>
-                                    </View>
-                                </TouchableOpacity>
-                                <TouchableOpacity>
-                                    <View style={styles.mo_view3_3}>
-                                        <Text style={styles.mo_view3_3tet}>平</Text>
-                                    </View>
-                                </TouchableOpacity>
-                                <TouchableOpacity>
-                                    <View style={styles.mo_view3_4}>
-                                        <Text style={styles.mo_view3_4tet}>蓝</Text>
-                                    </View>
-                                </TouchableOpacity>
+                                <View style={styles.moview3_1_1} >
+                                    <Text style={styles.moview3_1_txt}>您的支持方</Text>
+                                </View>
+
+                                <View style={styles.mo_view3_1div}>
+                                    <TouchableOpacity onPress={()=>{
+                                        //执行打勾事件
+                                        this.switchover("red");
+
+                                        this.setState({ isModalVisible: false });
+                                    }}>
+                                        <View style={styles.mo_view3_2}>
+                                            <Text style={styles.mo_view3_2tet}>红</Text>
+                                            {this.state.tick.red&&<Image style={styles.square} source={require('../../imagers/Match/square1.png')} />}
+                                        </View>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={()=>{
+                                        //执行打勾事件
+                                        this.switchover("yellow");
+
+                                        this.setState({ isModalVisible: false });
+                                    }}>
+                                        <View style={styles.mo_view3_3}>
+                                            <Text style={styles.mo_view3_3tet}>平</Text>
+                                            {this.state.tick.yellow&&<Image style={styles.square} source={require('../../imagers/Match/square1.png')} />}
+                                        </View>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={()=>{
+                                        //执行打勾事件
+                                        this.switchover("blue");
+
+                                        this.setState({ isModalVisible: false });
+                                    }}>
+                                        <View style={styles.mo_view3_4}>
+                                            <Text style={styles.mo_view3_4tet}>蓝</Text>
+                                            {this.state.tick.blue&&<Image style={styles.square} source={require('../../imagers/Match/square1.png')} />}
+                                        </View>
+                                    </TouchableOpacity>
+                                </View>
                             </View>
                         </View>
                     </View>
@@ -344,289 +557,4 @@ class FlastList extends Component {
         );
     }
 }
-
-const styles =StyleSheet.create( {
-    box1:{
-        flex:1
-    },
-    view4_1:{
-        width:'100%',
-        height:scaleSizeH(120),
-        borderWidth:1,
-        borderColor:'#CCCCCC',
-        backgroundColor:'#303030',
-        flexDirection:'row',
-    },
-    view4_2:{
-        width:'100%',
-        height:scaleSizeH(120),
-        borderWidth:1,
-        borderColor:'#CCCCCC',
-        backgroundColor:'#00CB00',
-        flexDirection:'row',
-    },
-    view4_3:{
-        width:'100%',
-        height:scaleSizeH(120),
-        borderWidth:1,
-        borderColor:'#CCCCCC',
-        backgroundColor:'#003200',
-        flexDirection:'row',
-    },
-    image:{
-        width:scaleSizeW(70),
-        height:scaleSizeH(70),
-        borderRadius:scaleSizeW(80)
-    },
-    image2:{
-        width:scaleSizeW(75),
-        height:scaleSizeH(50),
-    },
-    teview:{
-        flex:1,
-        justifyContent:'center'
-    },
-    tet:{
-        color:'#FFFFFF',
-        fontSize:setSpText(28),
-        marginLeft:scaleSizeW(10)
-    },
-    f_view1:{
-        flex:1,
-        justifyContent:'center'
-    },
-    f_tex:{
-        color:'#FFFFFF',
-        fontSize:setSpText(28),
-        marginLeft:scaleSizeW(45)
-    },
-    f_view2:{
-        flex:4,
-        flexDirection:'row'
-    },
-    f_view3:{
-        flex:3,
-        justifyContent:'center',
-        alignItems:'center'
-    },
-    f_view4:{
-        flex:2,
-        justifyContent:'center',
-        alignItems:'center'
-    },
-    f_view4tet:{
-        fontSize:setSpText(26),
-        color:'#ffffff'
-    },
-    f_view5:{
-        flex:1,
-        flexDirection:'row',
-        justifyContent:'center',
-        alignItems:'center'
-    },
-    f_view5_1:{
-        backgroundColor:'#0000FF',
-        height:scaleSizeH(40),
-        borderWidth:0.3,
-        borderColor:'#CCCCCC'
-    },
-    f_view5_1tet:{
-        color:'#FFFFFF',
-        fontSize:setSpText(30)
-    },
-    f_view5_2:{
-        backgroundColor:'#FD0204',
-        height:scaleSizeH(40),
-        marginLeft:scaleSizeW(55),
-        borderWidth:0.3,borderColor:'#CCCCCC'
-    },
-    f_view5_2tex:{
-        color:'#FFFFFF',
-        fontSize:setSpText(30)
-    },
-    f_view6:{
-        flex:3,
-        justifyContent:'center',
-        alignItems:'center'
-    },
-    f_view7:{
-        flex:2,
-        justifyContent:'center',
-        alignItems:'center'
-    },
-    f_view7tet:{
-        fontSize:setSpText(22),
-        color:'#ffffff'
-    },
-    f_view8:{
-        flex:1,
-        alignItems:'center',
-        justifyContent:'center'
-    },
-    f_view1_1:{
-        borderWidth:0.5,
-        borderColor:'#262626',
-        backgroundColor:'#00FF00',
-        width:scaleSizeW(150),
-        marginLeft:scaleSizeW(15)
-    },
-    f_view1_1tet:{
-        color:'#464646',
-        fontSize:setSpText(28),
-        marginLeft:scaleSizeW(30)
-    },
-    usimg:{
-        width:'100%',
-        height:scaleSizeH(353),
-    },
-    mo_view1:{
-        backgroundColor:'#ffffff',
-        width:scaleSizeW(700),
-        height:scaleSizeH(700)
-    },
-    mo_view2:{
-        flex:8,
-        borderColor:'#BEBEBE',
-        borderWidth:2
-    },
-    mo_view2_1:{
-        flex:2,
-        borderColor:'#666666',
-        borderTopWidth:2,
-        borderLeftWidth:1,
-        backgroundColor:'#666666',
-        flexDirection:'row'
-    },
-    mo_view2_1_2:{
-        flex:2,
-        borderColor:'#666666',
-        borderTopWidth:2,
-        borderLeftWidth:1,
-        backgroundColor:'#00CC00',
-        flexDirection:'row'
-    },
-    mo_view2_2:{
-        flex:4,
-        flexDirection:'row',
-        alignItems:'center'
-    },
-    mo_view2_2tex1:{
-        color:'#ffffff',
-        fontSize:setSpText(36),
-        fontWeight: '600',
-        marginLeft:scaleSizeW(10)
-    },
-    mo_view2_2tex2:{
-        color:'#ffffff',
-        fontSize:setSpText(26),
-        marginLeft:scaleSizeW(10)
-    } ,
-    mo_view2_3:{
-        flex:2,
-        justifyContent:'center'
-    },
-    mo_view2_4:{
-        width:scaleSizeW(160),
-        height:scaleSizeH(40),
-        backgroundColor:'#FFFFFF',
-        borderRadius:scaleSizeW(10),
-        alignItems:'center',
-        justifyContent:'center',
-        marginLeft:scaleSizeW(30)
-    },
-    mo_view2_4tet:{
-        color:'#000000',
-        fontSize:setSpText(26)
-    },
-    mo_view2_5:{
-        flex:10
-    },
-    mo_view2_6:{
-        flex:2,
-        backgroundColor:'#666666',
-        alignItems:'center',
-        justifyContent:'center'
-    },
-    mo_view2_6_1:{
-        width:scaleSizeW(650),
-        height:scaleSizeH(35),
-        borderColor:'#fff',
-        borderWidth:0.5,
-        flexDirection:'row'
-    },
-    mo_view2_6_1_1:{
-        flex:2,
-        backgroundColor:'#FF0000'
-    },
-    mo_view2_6_1_2:{
-        flex:1,
-        backgroundColor:'#FFFF00'
-    },
-    mo_view2_6_1_3:{
-        flex:3,
-        backgroundColor:'#0000FF'
-    },
-    mo_view3:{
-        flex:3,
-        backgroundColor:'#000000',
-        alignItems:'center',
-        justifyContent:'center'
-    },
-    mo_view3_1:{
-        width:scaleSizeW(550),
-        height:scaleSizeH(150),
-        borderWidth:1,
-        borderColor:'#ffffff',
-        flexDirection:'row',
-        justifyContent:'center',
-        alignItems:'center'
-    },
-    mo_view3_2:{
-        width:scaleSizeW(160),
-        height:scaleSizeH(80),
-        borderColor:'#666666',
-        borderWidth:1,
-        borderRadius:scaleSizeW(10),
-        backgroundColor:'#FF0000',
-        marginLeft:scaleSizeW(10),
-        justifyContent:'center',
-        alignItems:'center'
-    },
-    mo_view3_2tet:{
-        fontSize:setSpText(26),
-        color:'#ffffff'
-    },
-    mo_view3_3:{
-        width:scaleSizeW(160),
-        height:scaleSizeH(80),
-        borderColor:'#666666',
-        borderWidth:1,
-        borderRadius:scaleSizeW(10),
-        backgroundColor:'#FFFF00',
-        marginLeft:scaleSizeW(10),
-        justifyContent:'center',
-        alignItems:'center'
-    },
-    mo_view3_3tet:{
-        fontSize:setSpText(26),
-        color:'#000000'
-    },
-    mo_view3_4:{
-        width:scaleSizeW(160),
-        height:scaleSizeH(80),
-        borderColor:'#666666',
-        borderWidth:1,
-        borderRadius:scaleSizeW(10),
-        backgroundColor:'#085295',
-        marginLeft:scaleSizeW(10),
-        justifyContent:'center',
-        alignItems:'center'
-    },
-    mo_view3_4tet:{
-        fontSize:setSpText(26),
-        color:'#ffffff'
-    }
-
-
-});
 export default FlastList;

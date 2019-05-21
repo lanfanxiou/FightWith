@@ -1,130 +1,83 @@
-import {scaleSizeH, scaleSizeW} from "../../utils/Screen";
 import React,{Component} from "react";
-import {View, Image, Text, StyleSheet, Button, ScrollView, Dimensions} from "react-native";
-const { width, height } = Dimensions.get('window');//获取手机的宽和高
+import {View, Image, Text, StyleSheet, FlatList, ScrollView, Dimensions} from "react-native";
+import styles from "../../styles/Home_styles/HomeStyle";
+import GetSurplusTime from "../../utils/GetSurplusTime";
+import {I18n} from "../../language/I18n";
+
+
 {/*展示页*/}
 
 class Exhibition extends Component {
 
-    render() {
+    constructor(props) {
+        super(props);
+        this.state = {
+            cby:0,
+            cbk:1,
+            cbj:0,
+        };
+    }
+
+    _renderItemArticle=({item})=>{
+
         return (
-            <View style={styles.box1}>
-                <ScrollView>
-                <View style={styles.cardbody}>
-                    <Image style={styles.cbodyimg} source={require('../../imagers/Home/index_list2.png')}/>
-                </View>
-                <View style={styles.cardbodytxt}>
-                    <Text style={styles.ctxt}>MASFIGHT香港争霸赛</Text>
-                    <Text style={styles.ctxt}>2019年05月28日 19:00:00</Text>
-                </View>
-                <View style={styles.cbeginsfa}>
-                    <View style={styles.cbegins}>
-                        <Text style={styles.cbeginstxt}>距离开赛21天6小时41分26秒</Text>
-                    </View>
-                    <View style={styles.cline}></View>
-                </View>
 
+            <View>
                 <View style={styles.cardbody}>
-                    <Image style={styles.cbodyimg} source={require('../../imagers/Home/index_list1.png')}/>
+                    <Image style={styles.cbodyimg} source={{uri:item.Swiper}}/>
                 </View>
                 <View style={styles.cardbodytxt}>
-                    <Text style={styles.ctxt}>MASFIGHT 灵山巅峰对决</Text>
-                    <Text style={styles.ctxt}>2019年05月01日 19:00:00</Text>
+                    <Text style={styles.ctxt}>{item.MatchTheme}</Text>
+                    <Text style={styles.ctxt}>{item.Matchtime}</Text>
                 </View>
                 <View style={styles.cbeginsfa}>
                     <View style={styles.cbegins}>
-                        <Text style={styles.cbeginstxt}>赛事结束</Text>
-                    </View>
-                    <View style={styles.cline}></View>
-                </View>
 
-                <View style={styles.cardbody}>
-                    <Image style={styles.cbodyimg} source={require('../../imagers/Home/index_list3.png')}/>
-                </View>
-                <View style={styles.cardbodytxt}>
-                    <Text style={styles.ctxt}>MASFIGHT 灵山巅峰对决</Text>
-                    <Text style={styles.ctxt}>2019年05月01日 19:00:00</Text>
-                </View>
-                <View style={styles.cbeginsfa}>
-                    <View style={styles.cbegins}>
-                        <Text style={styles.cbeginstxt}>赛事结束</Text>
-                    </View>
-                    <View style={styles.cline}></View>
-                </View>
+                        {this.state.cby==0?<Text style={styles.cbeginstxt}>
+                            {I18n.t('Exhibition.Distance start')}<GetSurplusTime stringTime={item.Matchdate} units={{
+                            century:"世纪",	//“世纪”分隔符
+                            year:"年",		//“年”分隔符
+                            month:"月",		//“月”分隔符
+                            day:"天",		//“日”分隔符
+                            hour:"小时",	//“时”分隔符
+                            minute:"分",	//“分”分隔符
+                            second:"秒"		//“秒”分隔符
+                        }} />
+                        </Text> :null}
 
-                <View style={styles.cardbody}>
-                    <Image style={styles.cbodyimg} source={require('../../imagers/Home/index_list4.png')}/>
-                </View>
-                <View style={styles.cardbodytxt}>
-                    <Text style={styles.ctxt}>MASFIGHT 灵山巅峰对决</Text>
-                    <Text style={styles.ctxt}>2019年05月01日 19:00:00</Text>
-                </View>
-                <View style={styles.cbeginsfa}>
-                    <View style={styles.cbegins}>
-                        <Text style={styles.cbeginstxt}>赛事结束</Text>
+                        {this.state.cbk==0?<Text style={styles.cbeginstxt}>赛事结束</Text> :null}
+
+                        {this.state.cbj==1?<Text style={styles.cbeginstxt}>直播中</Text> :null}
+
                     </View>
                     <View style={styles.cline}></View>
                 </View>
-                {/*空白分割*/}
-                <View style={styles.blank}></View>
-                </ScrollView>
             </View>
+
+        )
+    };
+    _keyExtractorArticle=(item,index)=>{
+        return item.id
+    };
+    _separator=()=>{
+        return <View style={{height:4,backgroundColor:'#000000'}}></View>
+    };
+
+
+    render() {
+
+        return (
+            <FlatList
+                extraData={this.props.subState}
+                renderItem={this._renderItemArticle}
+                data={this.props.subState.HomeList}
+                keyExtractor={this._keyExtractorArticle}
+                horizontal={false}
+                ItemSeparatorComponent={this._separator}//分割线
+                showsHorizontalScrollIndicator={false}//滚动条隐藏
+            />
         );
     }
 }
 
-const styles =StyleSheet.create( {
-    box1:{
-        flex:1
-    },
-    cardbody:{
-        width:scaleSizeW(705),
-        height:scaleSizeH(450),
-        marginTop:scaleSizeH(13),
-        marginLeft: scaleSizeW(15),
-    },
-    cbodyimg:{
-        width:scaleSizeW(705),
-        height:scaleSizeH(450),
-    },
-    cardbodytxt:{
-        width:scaleSizeW(705),
-        height:scaleSizeH(70),
-        marginTop:scaleSizeH(10),
-        marginLeft: scaleSizeW(15),
-    },
-    ctxt:{
-        color:'#fff',
-        textAlign: 'center',
-        fontSize:scaleSizeW(21)
-    },
-    cbeginsfa:{
-        width:width,
-        alignItems:'center'
-    },
-    cbegins:{
-        width:scaleSizeW(600),
-        height:scaleSizeH(55),
-        backgroundColor:'#333',
-        borderWidth:0.3,
-        borderColor:'#fff',
-
-    },
-    cbeginstxt:{
-        color: '#E9E905',
-        fontSize:scaleSizeW(26),
-        textAlign:'center',
-        lineHeight:scaleSizeH(50),
-    },
-    cline:{
-        width:scaleSizeW(670),
-        borderWidth:0.3,
-        borderColor:'#fff',
-        marginTop:scaleSizeW(20),
-        marginBottom:scaleSizeW(10),
-    },
-    blank:{
-        height:scaleSizeH(200)
-    },
-});
 export default Exhibition;

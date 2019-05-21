@@ -1,14 +1,40 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View,Image} from 'react-native';
+import {StyleSheet,AsyncStorage} from 'react-native';
 import {Router,Scene,Tabs,Actions} from "react-native-router-flux";
 import Home from "./pages/Home/Home";
 import Match from "./pages/Match/Match";
 import  Rule from "./pages/Rule/Rule";
 import Videotape from "./pages/Videotape/Videotape";
-
+import {I18n} from "./language/I18n";
+import EventBus from 'react-native-event-bus'
 
 type Props = {};
 export default class App extends Component<Props> {
+
+    componentDidMount() {
+        EventBus.getInstance().addListener("event", (this.languageListener = ()=> {
+                this.getUserInfo()
+            })
+        )
+    }
+    getUserInfo() {
+        AsyncStorage.getItem(
+            'language',
+            (error,result)=>{
+                if (!error){
+                    this.setState({
+                        language: result
+                    })
+                }
+            }
+        )
+    }
+
+    componentWillUnmount() {
+        EventBus.getInstance().removeListener(
+            this.languageListener
+        )
+    }
 
     render() {
     return (
@@ -36,9 +62,9 @@ export default class App extends Component<Props> {
                 //设置tab上的样式
                 labelStyle={{alignItems:'center',justifyContent:'center',fontSize:12}}
                 >
-              <Scene key={"Home"} component={Home} initial={true} title="首页" />
-              <Scene key={"Match"} component={Match} title="比赛"/>
-              <Scene key={"Rule"} component={Rule} title="规则说明"/>
+              <Scene key={"Home"} component={Home} initial={true} title={I18n.t('login.home_page')}/>
+              <Scene key={"Match"} component={Match} title={I18n.t('login.match')}/>
+              <Scene key={"Rule"} component={Rule} title={I18n.t('login.rule_description')}/>
             </Tabs>
               <Scene key={"videotape"} component={Videotape} title="录像回播"/>
           </Scene>

@@ -1,11 +1,45 @@
 import React,{Component} from "react";
-import {View,Image,StyleSheet,Dimensions} from "react-native";
+import {View,Image,StyleSheet,Dimensions,TouchableOpacity} from "react-native";
 import Swiper from "react-native-swiper";
 import {scaleSizeH, scaleSizeW, setSpText} from "../../utils/Screen";
 const { width, height } = Dimensions.get('window');//获取手机的宽和高
+import styles from "../../styles/Match_styles/Swiperstyles";
+
 
 class Swiper1 extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            MatchList:[]
+        };
+        this.ggMakeMoney = this.ggMakeMoney.bind(this);
+    }
 
+    selectMatchList=()=>{
+        fetch('https://www.wulingshan.club/FightWith/json/jsonData.json')
+            .then((res) => {
+                return res.json();
+            }).then((data) => {
+            const userInfo=data.UserInfo;
+            if(userInfo.code==1){
+
+                this.setState({
+                    MatchList:userInfo.data.MatchList
+                })
+            }
+        }).catch((e) => {
+            alert(e.message);
+        });
+    };
+    componentDidMount() {
+        this.selectMatchList();
+    }
+
+    ggMakeMoney(id){
+       if(id==1){
+
+       }
+    }
     render() {
         return (
             <View style={styles.box1}>
@@ -18,23 +52,19 @@ class Swiper1 extends Component {
                 autoplay={true}          //自动轮播
                 autoplayTimeout={2}      //每隔2秒切换
             >
-                <Image style={styles.image} source={require('../../imagers/Match/a1.jpg')}/>
-                <Image style={styles.image} source={require('../../imagers/Match/a2.jpg')}/>
-                <Image style={styles.image} source={require('../../imagers/Match/a1.jpg')}/>
-                <Image style={styles.image} source={require('../../imagers/Match/a2.jpg')}/>
+                    {this.state.MatchList.map((info, index) => {
+                        return (
+                            <View>
+                                <TouchableOpacity onPress={()=>{this.ggMakeMoney(info.id)}}>
+                                    <Image style={styles.image} source={{uri:info.Swiper}}/>
+                                </TouchableOpacity>
+                            </View>
+                        )
+                    })}
             </Swiper>
+
             </View>
         );
     }
 }
-
-const styles =StyleSheet.create( {
-    box1:{
-        flex:1
-    },
-    image: {
-        width:width,//scaleSizeW(705),
-        height:scaleSizeH(380)
-    },
-});
 export default Swiper1;
