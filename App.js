@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet,AsyncStorage} from 'react-native';
+import {StyleSheet,AsyncStorage,View,Text,Button} from 'react-native';
 import {Router,Scene,Tabs,Actions} from "react-native-router-flux";
 import Home from "./pages/Home/Home";
 import Match from "./pages/Match/Match";
@@ -7,9 +7,22 @@ import  Rule from "./pages/Rule/Rule";
 import Videotape from "./pages/Videotape/Videotape";
 import {I18n} from "./language/I18n";
 import EventBus from 'react-native-event-bus'
+import Modal from "react-native-modal";
+import PersonalCenter from "./pages/PersonalCenter/PersonalCenter"
+import Myorder from "./pages/PersonalCenter/Myorder"
 
 type Props = {};
 export default class App extends Component<Props> {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isModalVisible: false
+        };
+    }
+
+    toggleModal = () => {
+        this.setState({ isModalVisible: !this.state.isModalVisible });
+    };
 
     componentDidMount() {
         EventBus.getInstance().addListener("event", (this.languageListener = ()=> {
@@ -63,10 +76,12 @@ export default class App extends Component<Props> {
                 labelStyle={{alignItems:'center',justifyContent:'center',fontSize:12}}
                 >
               <Scene key={"Home"} component={Home} initial={true} title={I18n.t('login.home_page')}/>
-              <Scene key={"Match"} component={Match} title={I18n.t('login.match')}/>
+              <Scene key={"Match"} component={Match} title={I18n.t('login.match')} onPress={this.toggleModal}/>
               <Scene key={"Rule"} component={Rule} title={I18n.t('login.rule_description')}/>
             </Tabs>
               <Scene key={"videotape"} component={Videotape} title="录像回播"/>
+              <Scene key={"PersonalCenter"} component={PersonalCenter} title="会员权益"/>
+              <Scene key={"Myorder"} component={Myorder} title="我的订单"/>
           </Scene>
         </Router>
     );

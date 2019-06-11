@@ -311,11 +311,13 @@ class FlastList extends Component {
                 {/*已结束*/}
                 <Modal isVisible={this.state.isModalVisible}
                        onBackdropPress={() => this.setState({ isModalVisible: false })}
-                       style={{paddingTop:scaleSizeH(470),alignItems:'center'}}
+                       style={{paddingTop:scaleSizeH(230),alignItems:'center'}}
                        backdropColor={'rbga(0,0,0,0.5)'}
                 >
                     <View style={styles.mo_view1}>
+                        {/*头部加图片加支持度*/}
                         <View style={styles.mo_view2}>
+                            {/*头部*/}
                             <View style={styles.mo_view2_1}>
                                 <View style={styles.mo_view2_2}>
                                     <Text style={styles.mo_view2_2tex1}>{this.state.overres}</Text>
@@ -329,10 +331,10 @@ class FlastList extends Component {
                                     </TouchableOpacity>
                                 </View>
                             </View>
+                            {/*图片*/}
                             <View style={styles.mo_view2_5}>
                                 <ImageBackground style={styles.usimg} source={require('../../imagers/Match/box1.jpg')}/>
                             </View>
-
                             {/*支持度*/}
                             <View style={styles.mo_view2_6}>
                                 <View style={styles.mo_view2_6_1}>
@@ -347,11 +349,15 @@ class FlastList extends Component {
                                     </View>
                                 </View>
                             </View>
-
+                            {/*新加功能/游戏玩法*/}
+                            <View style={styles.coke}>
+                                <View style={styles.coke_title}>
+                                    <Text style={styles.coke_title_text}>{this.state.overtitle}</Text>
+                                </View>
+                                <ModalDropdown style={styles.coke_btn} defaultValue={"游戏玩法"} options={this.state.cokedata}/>
+                            </View>
                         </View>
-
                         {/*支持红黄蓝*/}
-
                         <View style={styles.mo_view3}>
                             <View style={styles.mo_view3_1}>
                                 <View style={styles.moview33_1_1} >
@@ -395,42 +401,61 @@ class FlastList extends Component {
                                 </View>
                             </View>
                         </View>
+                        {/*选择投注*/}
+                        <View style={styles.select_bycoke}>
+                            <TouchableOpacity style={styles.select_bycoke_view1}>
+                                <TextInput editable={false} keyboardType="number-pad"  placeholderTextColor={'#FFF'} placeholder={'6-10'} maxLength={2}   style={styles.select_bycoke_view1_text}></TextInput>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.select_bycoke_view2} onPress={()=>{this.setState({ isModalVisible: false });}}>
+                                <Text style={styles.select_bycoke_view2_btn}>确定</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </Modal>
 
                 <Modal isVisible={this.state.isModalVisible2}
                        onBackdropPress={() => this.setState({ isModalVisible2: false })}
-                       style={{paddingTop:scaleSizeH(470),alignItems:'center'}}
+                       style={{paddingTop:scaleSizeH(230),alignItems:'center'}}
                        backdropColor={'rbga(0,0,0,0.5)'}
                 >
                     <View style={styles.mo_view1}>
+                        {/*头部加图片加支持度*/}
                         <View style={styles.mo_view2}>
+                            {/*头部*/}
                             <View style={styles.mo_view2_1_2}>
                                 <View style={styles.mo_view2_2}>
-                                    <Text style={styles.mo_view2_2tex1}>{this.state.Conductres}</Text>
-                                    <Text style={styles.mo_view2_2tex2}>{this.state.Conductdate}</Text>
+                                    <Text style={styles.mo_view2_2tex1}>{this.state.overres}</Text>
+                                    <Text style={styles.mo_view2_2tex2}>{this.state.overdate}</Text>
                                 </View>
                                 <View style={styles.mo_view2_3}></View>
                             </View>
+                            {/*图片*/}
                             <View style={styles.mo_view2_5}>
                                 <ImageBackground style={styles.usimg} source={require('../../imagers/Match/box1.jpg')}/>
                             </View>
+                            {/*支持度*/}
                             <View style={styles.mo_view2_6}>
                                 <View style={styles.mo_view2_6_1}>
-                                    <View style={styles.mo_view2_6_1}>
-                                        <View style={{...styles.mo_view2_6_1_1,flex:this.state.lightPillar.red}}>
-                                            {/*{this.state.ryb==1?<Image source={require('../../imagers/Match/result.png')} style={styles.mo_view2_6img} />:null}*/}
-                                        </View>
-                                        <View style={{...styles.mo_view2_6_1_2,flex:this.state.lightPillar.yellow}}>
-                                            {/*{this.state.ryb==2?<Image source={require('../../imagers/Match/result.png')} style={styles.mo_view2_6img} />:null}*/}
-                                        </View>
-                                        <View style={{...styles.mo_view2_6_1_3,flex:this.state.lightPillar.blue}}>
-                                            {/*{this.state.ryb==3?<Image source={require('../../imagers/Match/result.png')} style={styles.mo_view2_6img} />:null}*/}
-                                        </View>
+                                    <View style={{...styles.mo_view2_6_1_1,flex:this.state.lightPillar.red}}>
+                                        {/*{this.state.ryb==1?<Image source={require('../../imagers/Match/Selection.png')} style={styles.mo_view2_6img} />:null}*/}
+                                    </View>
+                                    <View style={{...styles.mo_view2_6_1_2,flex:this.state.lightPillar.yellow}}>
+                                        {/*{this.state.ryb==2?<Image source={require('../../imagers/Match/Selection.png')} style={styles.mo_view2_6img} />:null}*/}
+                                    </View>
+                                    <View style={{...styles.mo_view2_6_1_3,flex:this.state.lightPillar.blue}}>
+                                        {/*{this.state.ryb==3?<Image source={require('../../imagers/Match/Selection.png')} style={styles.mo_view2_6img} />:null}*/}
                                     </View>
                                 </View>
                             </View>
+                            {/*新加功能/游戏玩法*/}
+                            <View style={styles.coke}>
+                                <View style={styles.coke_title}>
+                                    <Text style={styles.coke_title_text}>{this.state.overtitle}</Text>
+                                </View>
+                                <ModalDropdown style={styles.coke_btn} defaultValue={"游戏玩法"} options={this.state.cokedata}/>
+                            </View>
                         </View>
+                        {/*支持红黄蓝*/}
                         <View style={styles.mo_view33}>
                             <View style={styles.mo_view3_1}>
                                 <View style={styles.moview3_1_1} >
@@ -473,41 +498,62 @@ class FlastList extends Component {
                                     </TouchableOpacity>
                                 </View>
                             </View>
+                        </View>
+                        {/*选择投注*/}
+                        <View style={styles.select_bycoke}>
+                            <TouchableOpacity style={styles.select_bycoke_view1}>
+                                <TextInput editable={false} keyboardType="number-pad"  placeholderTextColor={'#FFF'} placeholder={'6-10'} maxLength={2}   style={styles.select_bycoke_view1_text}></TextInput>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.select_bycoke_view2} onPress={()=>{this.setState({ isModalVisible2: false });}}>
+                                <Text style={styles.select_bycoke_view2_btn}>确定</Text>
+                            </TouchableOpacity>
                         </View>
                     </View>
                 </Modal>
 
                 <Modal isVisible={this.state.isModalVisible3}
                        onBackdropPress={() => this.setState({ isModalVisible3: false })}
-                       style={{paddingTop:scaleSizeH(470),alignItems:'center'}}
+                       style={{paddingTop:scaleSizeH(230),alignItems:'center'}}
                        backdropColor={'rbga(0,0,0,0.5)'}
                 >
                     <View style={styles.mo_view1}>
+                        {/*头部加图片加支持度*/}
                         <View style={styles.mo_view2}>
+                            {/*头部*/}
                             <View style={styles.mo_view2_1_2}>
                                 <View style={styles.mo_view2_2}>
-                                    <Text style={styles.mo_view2_2tex1}>{this.state.soonres}</Text>
-                                    <Text style={styles.mo_view2_2tex2}>{this.state.soondate}</Text>
+                                    <Text style={styles.mo_view2_2tex1}>{this.state.overres}</Text>
+                                    <Text style={styles.mo_view2_2tex2}>{this.state.overdate}</Text>
                                 </View>
                                 <View style={styles.mo_view2_3}></View>
                             </View>
+                            {/*图片*/}
                             <View style={styles.mo_view2_5}>
                                 <ImageBackground style={styles.usimg} source={require('../../imagers/Match/box1.jpg')}/>
                             </View>
+                            {/*支持度*/}
                             <View style={styles.mo_view2_6}>
                                 <View style={styles.mo_view2_6_1}>
                                     <View style={{...styles.mo_view2_6_1_1,flex:this.state.lightPillar.red}}>
-                                        {/*{this.state.ryb==1?<Image source={require('../../imagers/Match/result.png')} style={styles.mo_view2_6img} />:null}*/}
+                                        {/*{this.state.ryb==1?<Image source={require('../../imagers/Match/Selection.png')} style={styles.mo_view2_6img} />:null}*/}
                                     </View>
                                     <View style={{...styles.mo_view2_6_1_2,flex:this.state.lightPillar.yellow}}>
-                                        {/*{this.state.ryb==2?<Image source={require('../../imagers/Match/result.png')} style={styles.mo_view2_6img} />:null}*/}
+                                        {/*{this.state.ryb==2?<Image source={require('../../imagers/Match/Selection.png')} style={styles.mo_view2_6img} />:null}*/}
                                     </View>
                                     <View style={{...styles.mo_view2_6_1_3,flex:this.state.lightPillar.blue}}>
-                                        {/*{this.state.ryb==3?<Image source={require('../../imagers/Match/result.png')} style={styles.mo_view2_6img} />:null}*/}
+                                        {/*{this.state.ryb==3?<Image source={require('../../imagers/Match/Selection.png')} style={styles.mo_view2_6img} />:null}*/}
                                     </View>
                                 </View>
                             </View>
+                            {/*新加功能/游戏玩法*/}
+                            <View style={styles.coke}>
+                                <View style={styles.coke_title}>
+                                    <Text style={styles.coke_title_text}>{this.state.overtitle}</Text>
+                                </View>
+                                <ModalDropdown style={styles.coke_btn} defaultValue={"游戏玩法"} options={this.state.cokedata}/>
+                            </View>
                         </View>
+                        {/*支持红黄蓝*/}
                         <View style={styles.mo_view33}>
                             <View style={styles.mo_view3_1}>
                                 <View style={styles.moview3_1_1} >
@@ -550,6 +596,15 @@ class FlastList extends Component {
                                     </TouchableOpacity>
                                 </View>
                             </View>
+                        </View>
+                        {/*选择投注*/}
+                        <View style={styles.select_bycoke}>
+                            <TouchableOpacity style={styles.select_bycoke_view1}>
+                                <TextInput editable={false} keyboardType="number-pad"  placeholderTextColor={'#FFF'} placeholder={'6-10'} maxLength={2}   style={styles.select_bycoke_view1_text}></TextInput>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.select_bycoke_view2} onPress={()=>{this.setState({ isModalVisible3: false });}}>
+                                <Text style={styles.select_bycoke_view2_btn}>确定</Text>
+                            </TouchableOpacity>
                         </View>
                     </View>
                 </Modal>

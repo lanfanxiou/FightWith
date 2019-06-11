@@ -143,23 +143,23 @@ const FlastListstyles =StyleSheet.create( {
     mo_view1:{
         backgroundColor:'#ffffff',
         width:scaleSizeW(700),
-        height:scaleSizeH(700)
+        height:scaleSizeH(1000)
     },
     mo_view2:{
-        flex:8,
+        flex:6,
         borderColor:'#BEBEBE',
         borderWidth:2
     },
     mo_view2_1:{
-        flex:2,
+        flex:1,
         borderColor:'#666666',
         borderTopWidth:2,
         borderLeftWidth:1,
-        backgroundColor:'#666666',
+        backgroundColor:'#656565',
         flexDirection:'row'
     },
     mo_view2_1_2:{
-        flex:2,
+        flex:1,
         borderColor:'#666666',
         borderTopWidth:2,
         borderLeftWidth:1,
@@ -200,10 +200,10 @@ const FlastListstyles =StyleSheet.create( {
         fontSize:setSpText(26)
     },
     mo_view2_5:{
-        flex:14
+        flex:4
     },
     mo_view2_6:{
-        flex:2,
+        flex:0.7,
         backgroundColor:'#666666',
         alignItems:'center',
         justifyContent:'center'
@@ -215,8 +215,6 @@ const FlastListstyles =StyleSheet.create( {
         borderWidth:0.5,
         flexDirection:'row'
     },
-
-
     mo_view2_6_1_1:{
         backgroundColor:'#FF0000',
         alignItems:'center',
@@ -237,15 +235,14 @@ const FlastListstyles =StyleSheet.create( {
         alignItems:'center',
         justifyContent:'center'
     },
-
     mo_view3:{
-        flex:3,
+        flex:2.3,
         backgroundColor:'#000000',
         alignItems:'center',
         justifyContent:'center'
     },
     mo_view33:{
-        flex:3,
+        flex:2.3,
         backgroundColor:'#003200',
         alignItems:'center',
         justifyContent:'center'
@@ -271,7 +268,7 @@ const FlastListstyles =StyleSheet.create( {
     },
     moview3_1_1:{
         position:'relative',
-        width:scaleSizeW(130),
+        width:scaleSizeW(140),
         height: scaleSizeH(38),
         backgroundColor: '#003200',
         top:scaleSizeH(-70),
@@ -279,7 +276,7 @@ const FlastListstyles =StyleSheet.create( {
     },
     moview33_1_1:{
         position:'relative',
-        width:scaleSizeW(130),
+        width:scaleSizeW(140),
         height: scaleSizeH(38),
         backgroundColor: '#000',
         top:scaleSizeH(-70),
@@ -347,6 +344,78 @@ const FlastListstyles =StyleSheet.create( {
     square:{
         width:scaleSizeW(35),
         height:scaleSizeH(35)
+    },
+    coke:{
+        width:"100%",
+        height:scaleSizeH(75),
+        flexDirection:'row'
+    },
+    coke_title:{
+        alignItems:'center',
+        justifyContent:'center',
+        backgroundColor:'#000',
+        flex:2.3,
+        textAlign: "center",
+        borderColor:'#FFF',
+        borderWidth:2
+    },
+    coke_title_text:{
+        color:"#FFF",
+        fontSize:setSpText(30),
+    },
+    coke_btn:{
+        borderWidth:2,
+        borderColor:'#FFF',
+        flex:1,
+        backgroundColor:'#656565',
+        alignItems:'center',
+        justifyContent:'center',
+    },
+    select_bycoke:{
+        borderTopWidth:1,
+        borderColor:'#FFF',
+        flex:1,
+        backgroundColor:'#EC1B23',
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent:'center'
+    },
+    select_bycoke_view1:{
+        flex:1,
+        height:'100%',
+        justifyContent:'center'
+    },
+    select_bycoke_view1_text:{
+        height:scaleSizeH(70),
+        width:scaleSizeW(300),
+        padding:0,
+        textAlign:'center',
+        color:'#FFF',
+        backgroundColor:'#656565',
+        borderColor:'#40C6DA',
+        borderWidth:1,
+        fontSize:setSpText(30),
+        position:'absolute',
+        right:0
+    },
+    select_bycoke_view2:{
+        flex:1,
+        height:'100%',
+        justifyContent:'center'
+    },
+    select_bycoke_view2_btn:{
+        width:scaleSizeW(300),
+        textAlign:'center',
+        paddingTop:7,
+        color:'#000',
+        backgroundColor:'#40C6DA',
+        borderColor:'#656565',
+        borderWidth:1,
+        fontSize:setSpText(30),
+        position:'absolute',
+        left:6,
+        height:scaleSizeH(70),
     }
+
 });
 export default FlastListstyles;

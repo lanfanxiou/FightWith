@@ -39,6 +39,25 @@ const Matchstyles =StyleSheet.create( {
         borderColor: '#CCCCCC',
         backgroundColor: '#303030',
         flexDirection: 'row',
+    },
+    view5:{
+        width:width,
+        height:scaleSizeH(160),
+        justifyContent:'center',
+        alignItems:'center',
+    },
+    view5_1:{
+        width:scaleSizeW(250),
+        height:scaleSizeH(70),
+        marginTop:scaleSizeH(8),
+        marginLeft:scaleSizeW(-20),
+        backgroundColor:'#41C7DB',
+        justifyContent:'center',
+        alignItems:'center',
+    },
+    view5_txt:{
+        color:'#000',
+        fontSize:setSpText(20)
     }
 });
 export default Matchstyles;

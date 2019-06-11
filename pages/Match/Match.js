@@ -1,10 +1,11 @@
 import React, {Component} from "react";
-import {View, Image, StyleSheet, Text, Dimensions} from "react-native";
+import {View, Image, TouchableOpacity, Text, Dimensions} from "react-native";
 import Swipe from "./Swiper1";
 import Details from "../static/Details";
 import Calendar1 from "./Calendar1";
 import AccordionTab from "./AccordionTab";
 import styles from "../../styles/Match_styles/Matchstyles";
+import {Actions} from "react-native-router-flux";
 
 
 const {width, height} = Dimensions.get('window');//获取手机的宽和高
@@ -57,6 +58,18 @@ class Match extends Component {
                     {/*FlastList列表*/}
                     <View style={styles.view4}>
                         <AccordionTab/>
+                    </View>
+                    <View style={styles.view5}>
+                        <TouchableOpacity onPress={Actions.PersonalCenter}>
+                            <View style={styles.view5_1}>
+                                <Text style={styles.view5_txt}>个人中心</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={Actions.Myorder}>
+                            <View style={styles.view5_1}>
+                                <Text style={styles.view5_txt}>订单记录</Text>
+                            </View>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
