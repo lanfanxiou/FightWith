@@ -370,6 +370,7 @@ const FlastListstyles =StyleSheet.create( {
         backgroundColor:'#656565',
         alignItems:'center',
         justifyContent:'center',
+        width:scaleSizeW(200)
     },
     select_bycoke:{
         borderTopWidth:1,

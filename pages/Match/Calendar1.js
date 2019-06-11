@@ -65,7 +65,7 @@ class Calendar1 extends Component {
                     </View>
                 </View>
                 <Modal isVisible={this.state.isModalVisible}
-                       //backdropColor={'rbga(0,0,0,0.5)'}
+                       //backdropColor={'rbga(0,0,0,0.5)'}minDate={this.state.time} maxDate={'2019-05-29'}
                        onBackdropPress={() => this.setState({ isModalVisible: false })}
                         style={{alignItems:'center',marginBottom:scaleSizeH(420)}}
                 >
@@ -75,8 +75,6 @@ class Calendar1 extends Component {
                             <Calendar
                                 onDayPress={this.onDayPress}
                                 style={styles.calendar}
-                                minDate={this.state.time}
-                                maxDate={'2019-05-29'}
                                 monthFormat={'yyyy MM dd'}
                                 hideExtraDays
                                 markedDates={{
