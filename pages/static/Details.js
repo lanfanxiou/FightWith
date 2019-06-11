@@ -4,6 +4,7 @@ import {scaleSizeH, scaleSizeW,setSpText} from "../../utils/Screen";
 import Modal from "react-native-modal";
 import styles from "../../styles/Static_styles/Staticstyles";
 import {I18n} from "../../language/I18n";
+import * as api from "../../utils/api";
 
 
 //全局通信变量
@@ -36,9 +37,10 @@ class Details extends Component {
             userPwd:inputData
         })
     }
+
     //登录
     _login(){
-        websock = new WebSocket('ws://172.16.31.250:9009/');
+        websock = new WebSocket(api.api);
         websock.onopen=()=>{
             var user = {
                 'astrAccountName':this.state.userName,
