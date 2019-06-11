@@ -17,6 +17,8 @@ class FlastList extends Component {
             isModalVisible: false,
             isModalVisible2: false,
             isModalVisible3: false,
+            overtitle:'秋名山巅峰对决',
+            coketext:'游戏玩法',
             overdate:'',
             overres:'',
             Conductdate:'',
@@ -32,6 +34,13 @@ class FlastList extends Component {
                 red:5,
                 yellow:15,
                 blue:30
+            },
+            cokedata:{
+                coke1:'玩法1',
+                coke2:'玩法2',
+                coke3:'玩法3',
+                coke4:'玩法4',
+                coke5:'玩法5',
             },
             ryb:3//比赛结果，123
         };
@@ -603,7 +612,7 @@ class FlastList extends Component {
                         {/*选择投注*/}
                         <View style={styles.select_bycoke}>
                             <TouchableOpacity style={styles.select_bycoke_view1}>
-                                <TextInput editable={false} keyboardType="number-pad"  placeholderTextColor={'#FFF'} placeholder={'6-10'} maxLength={2}   style={styles.select_bycoke_view1_text}></TextInput>
+                                <TextInput editable={true} keyboardType="number-pad"  placeholderTextColor={'#FFF'} placeholder={'6-10'} maxLength={2}   style={styles.select_bycoke_view1_text}></TextInput>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.select_bycoke_view2} onPress={()=>{this.setState({ isModalVisible3: false });}}>
                                 <Text style={styles.select_bycoke_view2_btn}>确定</Text>
