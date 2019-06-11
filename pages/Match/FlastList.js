@@ -1,9 +1,12 @@
 import React,{Component} from "react";
-import {View,Image,Text,StyleSheet,FlatList,TouchableOpacity,ImageBackground} from "react-native";
+import {View,Image,Text,StyleSheet,FlatList,TouchableOpacity,ImageBackground,TextInput} from "react-native";
 import {scaleSizeH, scaleSizeW, setSpText} from "../../utils/Screen";
 import Modal from "react-native-modal";
 import {Actions} from "react-native-router-flux";
 import styles from "../../styles/Match_styles/FlastListstyles";
+import ModalDropdown from "react-native-modal-dropdown";
+
+
 
 class FlastList extends Component {
 
