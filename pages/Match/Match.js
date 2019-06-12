@@ -6,6 +6,7 @@ import Calendar1 from "./Calendar1";
 import AccordionTab from "./AccordionTab";
 import styles from "../../styles/Match_styles/Matchstyles";
 import {Actions} from "react-native-router-flux";
+import FlastList from "./FlastList";
 
 
 const {width, height} = Dimensions.get('window');//获取手机的宽和高

@@ -76,7 +76,7 @@ export default class App extends Component<Props> {
                 labelStyle={{alignItems:'center',justifyContent:'center',fontSize:12}}
                 >
               <Scene key={"Home"} component={Home} initial={true} title={I18n.t('login.home_page')}/>
-              <Scene key={"Match"} component={Match} title={I18n.t('login.match')} onPress={this.toggleModal}/>
+              <Scene key={"Match"} component={Match} title={I18n.t('login.match')}/>
               <Scene key={"Rule"} component={Rule} title={I18n.t('login.rule_description')}/>
             </Tabs>
               <Scene key={"videotape"} component={Videotape} title="录像回播"/>

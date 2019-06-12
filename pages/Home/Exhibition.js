@@ -18,22 +18,21 @@ class Exhibition extends Component {
     }
 
     _renderItemArticle=({item})=>{
-
         return (
 
             <View>
                 <View style={styles.cardbody}>
-                    <Image style={styles.cbodyimg} source={{uri:item.Swiper}}/>
+                    <Image style={styles.cbodyimg} source={{uri:item.Picture}}/>
                 </View>
                 <View style={styles.cardbodytxt}>
-                    <Text style={styles.ctxt}>{item.MatchTheme}</Text>
-                    <Text style={styles.ctxt}>{item.Matchtime}</Text>
+                    <Text style={styles.ctxt}>{item.GameTheme}</Text>
+                    <Text style={styles.ctxt}>{item.StartDate}</Text>
                 </View>
                 <View style={styles.cbeginsfa}>
                     <View style={styles.cbegins}>
 
                         {this.state.cby==0?<Text style={styles.cbeginstxt}>
-                            {I18n.t('Exhibition.Distance start')}<GetSurplusTime stringTime={item.Matchdate} units={{
+                            {I18n.t('Exhibition.Distance start')}<GetSurplusTime stringTime={item.StartDate} units={{
                             century:"世纪",	//“世纪”分隔符
                             year:"年",		//“年”分隔符
                             month:"月",		//“月”分隔符
