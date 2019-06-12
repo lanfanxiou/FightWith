@@ -1,5 +1,5 @@
 import React,{Component} from "react";
-import {View, Image, Text, TouchableOpacity, Dimensions,ScrollView,Button} from "react-native";
+import {View, Image, Text, TouchableOpacity, Dimensions,ScrollView,Button,DeviceEventEmitter} from "react-native";
 import {scaleSizeH, scaleSizeW, setSpText} from "../../utils/Screen";
 import Modal from "react-native-modal";
 import {Calendar} from 'react-native-calendars';
@@ -7,6 +7,7 @@ import * as time from '../../utils/time.js'//引用js
 import {LocaleConfig} from 'react-native-calendars';
 import styles from "../../styles/Match_styles/Calenderstyles";
 import {I18n} from "../../language/I18n";
+import {api} from "../../utils/api";
 
 
 LocaleConfig.locales['fr'] = {
@@ -25,11 +26,12 @@ class Calendar1 extends Component {
         this.state = {
             value:I18n.t('Match.name'),
             data:I18n.t('Match.time'),
-            data2:time.monthDay,
+            data2:time.getTime,
             isModalVisible: false,
             selected:'',
             time:'2019-05-10',
-            time2:'2019-05-19'
+            time2:'2019-05-19',
+            MatchAll:[]
         };
         this.onDayPress = this.onDayPress.bind(this);
     }
@@ -37,12 +39,44 @@ class Calendar1 extends Component {
         this.setState({ isModalVisible: !this.state.isModalVisible });
     };
     onDayPress(day) {
-        const s2=day.dateString.substring(5);
+        const s2=day.dateString.substring(0);
         this.setState({
             selected: day.dateString,
             data2:s2,
-            data:s2
+            data:s2,
         });
+        this.selectDateMatch(s2)
+    }
+
+    /**
+     * @罗贻乐
+     * @查询在日期内的赛事
+     * @param day
+     */
+    selectDateMatch(day){
+        var then=this;
+        var date={
+            'aDate':day
+        }
+        const srt = JSON.stringify(date);
+        const action = {
+            "FromUser": "",
+            "Tag": "ac",
+            "Message": srt,
+            "ActionMethod":"CompetitionBLL.GetComprtitionByDate"
+        };
+        var wss=new WebSocket(api);
+        wss.onopen=function () {
+            wss.send(JSON.stringify(action))
+        }
+        wss.onmessage=function (ev) {
+            var data=JSON.parse(ev.data)
+            if (data.ActionMethod==="CompetitionBLL.GetComprtitionByDate") {
+                var message=data.Message;
+                var result = JSON.parse(message);
+                DeviceEventEmitter.emit("Result",result);
+            }
+        }
     }
     render() {
         return (
@@ -75,14 +109,12 @@ class Calendar1 extends Component {
                             <Calendar
                                 onDayPress={this.onDayPress}
                                 style={styles.calendar}
-                                minDate={this.state.time}
-                                maxDate={'2019-05-29'}
                                 monthFormat={'yyyy MM dd'}
                                 hideExtraDays
                                 markedDates={{
                                     [this.state.selected]: {selected: true, disableTouchEvent: true, selectedDotColor: 'orange'},
-                                    '2019-05-17': {marked: true},
-                                    '2019-05-18': {marked: true, dotColor: 'red', activeOpacity: 0,text:'123'},
+                                    '2019-06-17': {marked: true},
+                                    '2019-06-18': {marked: true, dotColor: 'red', activeOpacity: 0,text:'123'},
                                     [this.state.time2]: {marked: true, dotColor: 'red', activeOpacity: 0}
                                 }}
                             />

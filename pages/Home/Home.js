@@ -1,5 +1,5 @@
 import React,{Component} from "react";
-import {View, Image, Text, StyleSheet, Dimensions, ScrollView, TouchableOpacity, AsyncStorage} from "react-native";
+import {View, Image, Text, StyleSheet, Dimensions, ScrollView, TouchableOpacity, AsyncStorage } from "react-native";
 import Details from "../static/Details";
 import Exhibition from "./Exhibition";
 import styles from "../../styles/Home_styles/HomeStyle";
@@ -32,6 +32,8 @@ class Home extends Component {
             }
         )
     };
+
+
     componentDidMount() {
         this.selectMatchList();
     }

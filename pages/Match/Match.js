@@ -6,6 +6,7 @@ import Calendar1 from "./Calendar1";
 import AccordionTab from "./AccordionTab";
 import styles from "../../styles/Match_styles/Matchstyles";
 import {Actions} from "react-native-router-flux";
+import FlastList from "./FlastList";
 
 
 const {width, height} = Dimensions.get('window');//获取手机的宽和高
@@ -15,29 +16,9 @@ class Match extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            MatchList: [],
+            List2:[],
             isModalVisible: false,
         };
-    }
-
-    selectMatchList = () => {
-        fetch('https://www.wulingshan.club/FightWith/json/jsonData.json')
-            .then((res) => {
-                return res.json();
-            }).then((data) => {
-                const userInfo=data.UserInfo;
-            if (userInfo.code == 1) {
-                this.setState({
-                    MatchList: userInfo.data.MatchList
-                })
-            }
-        }).catch((e) => {
-            alert(e.message);
-        });
-    }
-
-    componentDidMount() {
-        this.selectMatchList();
     }
 
     render() {
@@ -49,7 +30,7 @@ class Match extends Component {
                 </View>
                 <View style={styles.view2}>
                     <View style={styles.view2_1}>
-                        <Calendar1/>
+                        <Calendar1 />
                     </View>
                     {/*轮播图*/}
                     <View style={{flex: 5}}>
