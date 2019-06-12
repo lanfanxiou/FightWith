@@ -5,6 +5,7 @@ import Modal from "react-native-modal";
 import {Actions} from "react-native-router-flux";
 import styles from "../../styles/Match_styles/FlastListstyles";
 import ModalDropdown from "react-native-modal-dropdown";
+import {getTime} from "../../utils/time";
 
 
 
@@ -171,41 +172,41 @@ class FlastList extends Component {
 
     };
     _renderItemArticle=({item})=>{
-        if(item.color==0){
+        if(item.GameType==1){
             this.setState({
-                overdate:item.date,
-                overres:item.Result
+                overdate:item.StartDate,
+                overres:item.GameType ? "已结束" : "即将开始"
             });
             return (
                 <TouchableOpacity onPress={this.toggleModal}>
                     <View style={styles.view4_1}>
                         <View style={{flex:2}}>
                             <View style={styles.teview}>
-                                <Text style={styles.tet}>{item.date}</Text>
+                                <Text style={styles.tet}>{item.StartDate}</Text>
                             </View>
                             <View style={styles.f_view1}>
-                                <Text style={styles.f_tex}>{item.Result}</Text>
+                                <Text style={styles.f_tex}>{this.state.overres}</Text>
                             </View>
                         </View>
                         <View style={styles.f_view2}>
                             <View style={{flex:1}}>
                                 <View style={styles.f_view3}>
-                                    <Image style={styles.image2} source={{uri:item.name1con}}/>
+                                    <Image style={styles.image2} source={{uri:item.OnePicture}}/>
                                 </View>
                                 <View style={styles.f_view4}>
-                                    <Text style={styles.f_view4tet}>{item.name1}</Text>
+                                    <Text style={styles.f_view4tet}>{item.ParticipantOne}</Text>
                                 </View>
                             </View>
-                            <View style={styles.f_view5}>
-                                <View style={styles.f_view5_1}><Text style={styles.f_view5_1tet}>{item.name1res}</Text></View>
-                                <View style={styles.f_view5_2}><Text style={styles.f_view5_2tex}>{item.name2res}</Text></View>
-                            </View>
+                            {/*<View style={styles.f_view5}>*/}
+                            {/*    <View style={styles.f_view5_1}><Text style={styles.f_view5_1tet}>{item.name1res}</Text></View>*/}
+                            {/*    <View style={styles.f_view5_2}><Text style={styles.f_view5_2tex}>{item.name2res}</Text></View>*/}
+                            {/*</View>*/}
                             <View style={{flex:1}}>
                                 <View style={styles.f_view6}>
-                                    <Image style={styles.image2} source={{uri:item.name2con}}/>
+                                    <Image style={styles.image2} source={{uri:item.TwoPicture}}/>
                                 </View>
                                 <View style={styles.f_view7}>
-                                    <Text style={styles.f_view7tet}>{item.name2}</Text>
+                                    <Text style={styles.f_view7tet}>{item.ParticipantTwo}</Text>
                                 </View>
                             </View>
                         </View>
@@ -215,40 +216,40 @@ class FlastList extends Component {
                     </View>
                 </TouchableOpacity>
             );
-        }else if(item.color==1){
+        }else if(item.GameType !==1 && item.GameType !==0){
             this.setState({
-                Conductdate:item.date,
-                Conductres:item.Result
+                Conductdate:item.StartDate,
+                Conductres:"正在进行"
             });
             return (
                 <TouchableOpacity onPress={this.toggleModal2}>
                     <View style={styles.view4_2}>
                         <View style={{flex:2}}>
                             <View style={styles.teview}>
-                                <Text style={styles.tet}>{item.date}</Text>
+                                <Text style={styles.tet}>{item.StartDate}</Text>
                             </View>
                             <View style={styles.f_view1}>
                                 <View style={styles.f_view1_1}>
-                                    <Text style={styles.f_view1_1tet}>{item.Result}</Text>
+                                    <Text style={styles.f_view1_1tet}>{this.state.Conductres}</Text>
                                 </View>
                             </View>
                         </View>
                         <View style={styles.f_view2}>
                             <View style={{flex:1}}>
                                 <View style={styles.f_view3}>
-                                    <Image style={styles.image2} source={{uri:item.name1con}}/>
+                                    <Image style={styles.image2} source={{uri:item.OnePicture}}/>
                                 </View>
                                 <View style={styles.f_view4}>
-                                    <Text style={styles.f_view4tet}>{item.name1}</Text>
+                                    <Text style={styles.f_view4tet}>{item.ParticipantOne}</Text>
                                 </View>
                             </View>
                             <View style={styles.f_view5}></View>
                             <View style={{flex:1}}>
                                 <View style={styles.f_view6}>
-                                    <Image style={styles.image2} source={{uri:item.name2con}}/>
+                                    <Image style={styles.image2} source={{uri:item.TwoPicture}}/>
                                 </View>
                                 <View style={styles.f_view7}>
-                                    <Text style={styles.f_view7tet}>{item.name2}</Text>
+                                    <Text style={styles.f_view7tet}>{item.ParticipantTwo}</Text>
                                 </View>
                             </View>
                         </View>
@@ -258,38 +259,38 @@ class FlastList extends Component {
                     </View>
                 </TouchableOpacity>
             );
-        }else if(item.color==2){
+        }else if(item.GameType==0){
             this.setState({
-                soondate:item.date,
-                soonres:item.Result
+                soondate:item.StartDate,
+                soonres:item.GameType ? "已结束" : "即将开始"
             });
             return (
                 <TouchableOpacity onPress={this.toggleModal3}>
                     <View style={styles.view4_3}>
                         <View style={{flex:2}}>
                             <View style={styles.teview}>
-                                <Text style={styles.tet}>{item.date}</Text>
+                                <Text style={styles.tet}>{item.StartDate}</Text>
                             </View>
                             <View style={styles.f_view1}>
-                                <Text style={styles.f_tex}>{item.Result}</Text>
+                                <Text style={styles.f_tex}>{this.state.soonres}</Text>
                             </View>
                         </View>
                         <View style={styles.f_view2}>
                             <View style={{flex:1}}>
                                 <View style={styles.f_view3}>
-                                    <Image style={styles.image2} source={{uri:item.name1con}}/>
+                                    <Image style={styles.image2} source={{uri:item.OnePicture}}/>
                                 </View>
                                 <View style={styles.f_view4}>
-                                    <Text style={styles.f_view4tet}>{item.name1}</Text>
+                                    <Text style={styles.f_view4tet}>{item.ParticipantOne}</Text>
                                 </View>
                             </View>
                             <View style={styles.f_view5}></View>
                             <View style={{flex:1}}>
                                 <View style={styles.f_view6}>
-                                    <Image style={styles.image2} source={{uri:item.name2con}}/>
+                                    <Image style={styles.image2} source={{uri:item.TwoPicture}}/>
                                 </View>
                                 <View style={styles.f_view7}>
-                                    <Text style={styles.f_view7tet}>{item.name2}</Text>
+                                    <Text style={styles.f_view7tet}>{item.ParticipantTwo}</Text>
                                 </View>
                             </View>
                         </View>
@@ -302,7 +303,7 @@ class FlastList extends Component {
         }
     };
     _keyExtractorArticle=(item,index)=>{
-        return item.id.toString();
+        return item.ID.toString();
     };
     _separator=()=>{
         return <View style={{height:4,backgroundColor:'#000000'}}></View>

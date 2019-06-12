@@ -15,6 +15,8 @@ myDate.toLocaleString( );        //获取日期与时间
 
 //获取 月-日
 export const monthDay=(myDate.getMonth()+1)+'-'+(myDate.getDate());
+//获取 年-月-日
+export const getTime=myDate.getFullYear()+'-'+(myDate.getMonth()+1)+'-'+(myDate.getDate());
 
 // 日期时间脚本库方法列表
 // Date.prototype.isLeapYear 判断闰年

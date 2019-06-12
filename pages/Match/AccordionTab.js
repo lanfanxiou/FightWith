@@ -1,11 +1,12 @@
 import React,{Component} from "react";
-import { View,Text,FlatList,TouchableOpacity,StyleSheet,Dimensions,LayoutAnimation} from "react-native";
+import { View,Text,FlatList,TouchableOpacity,StyleSheet,Dimensions,LayoutAnimation,DeviceEventEmitter} from "react-native";
 import FlastList from "./FlastList";
 import styles from "../../styles/Match_styles/AccordionTabstyles";
+import {api} from "../../utils/api";
+import {getTime} from "../../utils/time";
 
 
 class AccordionTab extends Component {
-
     constructor(props) {
         super(props);
         // 记录点击
@@ -13,25 +14,51 @@ class AccordionTab extends Component {
             isSelect: -1,
             list:[],
             MatchList: [],
+            MatchData:[]
         }
     }
     selectMatchList = () => {
-        fetch('https://www.wulingshan.club/FightWith/json/jsonData.json')
-            .then((res) => {
-                return res.json();
-            }).then((data) => {
-            const userInfo=data.UserInfo;
-            if (userInfo.code == 1) {
-                this.setState({
-                    MatchList: userInfo.data.MatchList
+        var then=this;
+        var date={
+            'aDate':getTime
+        }
+        const srt = JSON.stringify(date);
+        const action = {
+            "FromUser": "",
+            "Tag": "ac",
+            "Message": srt,
+            "ActionMethod":"CompetitionBLL.GetComprtitionByDate"
+        };
+        var wss=new WebSocket(api);
+        wss.onopen=function () {
+            wss.send(JSON.stringify(action))
+        }
+        wss.onmessage=function (ev) {
+            var data=JSON.parse(ev.data)
+            if (data.ActionMethod==="CompetitionBLL.GetComprtitionByDate") {
+                var message=data.Message;
+                var result = JSON.parse(message);
+                then.setState({
+                    MatchList:result.Result
                 })
             }
-        }).catch((e) => {
-            alert(e.message);
-        });
+        }
     };
-    componentDidMount() {
+    getMatchAllList=()=>{
+        this.listener=DeviceEventEmitter.addListener("Result",(m)=>{
+            if (m.Result==null || m.Result==[]||m.Result.length<0){
+                alert("该日期无数据")
+            }else{
+                this.setState({
+                    MatchList:m.Result
+                })
+            }
+
+        })
+    };
+    componentDidMount():void {
         this.selectMatchList();
+        this.getMatchAllList()
     }
     // header点击
     itemTap = (index) => {
