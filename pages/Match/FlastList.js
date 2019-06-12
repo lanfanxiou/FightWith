@@ -437,8 +437,8 @@ class FlastList extends Component {
                             {/*头部*/}
                             <View style={styles.mo_view2_1_2}>
                                 <View style={styles.mo_view2_2}>
-                                    <Text style={styles.mo_view2_2tex1}>{this.state.overres}</Text>
-                                    <Text style={styles.mo_view2_2tex2}>{this.state.overdate}</Text>
+                                    <Text style={styles.mo_view2_2tex1}>{this.state.Conductres}</Text>
+                                    <Text style={styles.mo_view2_2tex2}>{this.state.Conductdate}</Text>
                                 </View>
                                 <View style={styles.mo_view2_3}></View>
                             </View>
@@ -535,8 +535,8 @@ class FlastList extends Component {
                             {/*头部*/}
                             <View style={styles.mo_view2_1_2}>
                                 <View style={styles.mo_view2_2}>
-                                    <Text style={styles.mo_view2_2tex1}>{this.state.overres}</Text>
-                                    <Text style={styles.mo_view2_2tex2}>{this.state.overdate}</Text>
+                                    <Text style={styles.mo_view2_2tex1}>{this.state.soonres}</Text>
+                                    <Text style={styles.mo_view2_2tex2}>{this.state.soondate}</Text>
                                 </View>
                                 <View style={styles.mo_view2_3}></View>
                             </View>
