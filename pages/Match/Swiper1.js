@@ -16,20 +16,25 @@ class Swiper1 extends Component {
     }
 
     selectMatchList=()=>{
-        fetch('https://www.wulingshan.club/FightWith/json/jsonData.json')
-            .then((res) => {
-                return res.json();
-            }).then((data) => {
-            const userInfo=data.UserInfo;
-            if(userInfo.code==1){
-
-                this.setState({
-                    MatchList:userInfo.data.MatchList
-                })
-            }
-        }).catch((e) => {
-            alert(e.message);
-        });
+        var thiz=this;
+        const action = {
+            "FromUser": "",
+            "Tag": "ac",
+            "Message": "null",
+            "ActionMethod":"CompetitionBLL.GetCompetitionByCarousel"
+        };
+        var wss=new WebSocket("ws://172.16.31.250:9009/");
+        wss.onopen=function () {
+            wss.send(JSON.stringify(action))
+        };
+        wss.onmessage=function (ev) {
+            var date=JSON.parse(ev.data);
+            var res=JSON.parse(date.Message);
+            var rees=res.Result;
+            thiz.setState({
+                MatchList:rees
+            });
+        };
     };
     componentDidMount() {
         this.selectMatchList();
@@ -55,8 +60,8 @@ class Swiper1 extends Component {
                     {this.state.MatchList.map((info, index) => {
                         return (
                             <View>
-                                <TouchableOpacity onPress={()=>{this.ggMakeMoney(info.id)}}>
-                                    <Image style={styles.image} source={{uri:info.Swiper}}/>
+                                <TouchableOpacity onPress={()=>{this.ggMakeMoney(info.ID)}}>
+                                    <Image style={styles.image} source={{uri:info.Picture}}/>
                                 </TouchableOpacity>
                             </View>
                         )
