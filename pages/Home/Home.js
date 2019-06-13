@@ -4,6 +4,7 @@ import Details from "../static/Details";
 import Exhibition from "./Exhibition";
 import styles from "../../styles/Home_styles/HomeStyle";
 import {I18n} from "../../language/I18n";
+import {api} from "../../utils/api";
 
 
 
@@ -24,7 +25,7 @@ class Home extends Component {
             "Message": "null",
             "ActionMethod":"CompetitionBLL.GetCompetitionByIndex"
         };
-        var wss=new WebSocket("ws://172.16.31.250:9009/");
+        var wss=new WebSocket(api);
         wss.onopen=function () {
             wss.send(JSON.stringify(action))
         };

@@ -21,7 +21,7 @@ class AccordionTab extends Component {
         var then=this;
         var date={
             'aDate':getTime
-        }
+        };
         const srt = JSON.stringify(date);
         const action = {
             "FromUser": "",
@@ -32,9 +32,9 @@ class AccordionTab extends Component {
         var wss=new WebSocket(api);
         wss.onopen=function () {
             wss.send(JSON.stringify(action))
-        }
+        };
         wss.onmessage=function (ev) {
-            var data=JSON.parse(ev.data)
+            var data=JSON.parse(ev.data);
             if (data.ActionMethod==="CompetitionBLL.GetComprtitionByDate") {
                 var message=data.Message;
                 var result = JSON.parse(message);

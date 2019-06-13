@@ -4,6 +4,7 @@ import Swiper from "react-native-swiper";
 import {scaleSizeH, scaleSizeW, setSpText} from "../../utils/Screen";
 const { width, height } = Dimensions.get('window');//获取手机的宽和高
 import styles from "../../styles/Match_styles/Swiperstyles";
+import {api} from "../../utils/api";
 
 
 class Swiper1 extends Component {
@@ -23,7 +24,7 @@ class Swiper1 extends Component {
             "Message": "null",
             "ActionMethod":"CompetitionBLL.GetCompetitionByCarousel"
         };
-        var wss=new WebSocket("ws://172.16.31.250:9009/");
+        var wss=new WebSocket(api);
         wss.onopen=function () {
             wss.send(JSON.stringify(action))
         };
