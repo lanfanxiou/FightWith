@@ -1,10 +1,9 @@
 import React,{Component} from "react";
-import {View, Image, Text, StyleSheet, Button, TouchableOpacity,TextInput} from "react-native";
+import {View, Image, Text, StyleSheet, Button, TouchableOpacity,TextInput,AsyncStorage} from "react-native";
 import {scaleSizeH, scaleSizeW,setSpText} from "../../utils/Screen";
 import Modal from "react-native-modal";
 import styles from "../../styles/Static_styles/Staticstyles";
 import {I18n} from "../../language/I18n";
-import * as api from "../../utils/api";
 
 
 //全局通信变量
@@ -16,15 +15,18 @@ class Details extends Component {
             userName:'',
             userPwd:'',
             isModalVisible: false,
+            wsOk:'登录成功',
+            wsNo:'密码或账号不正确',
+            wsClose:'您连接的网络！不行呀！'
         };
         this._onChangeName = this._onChangeName.bind(this);
         this._onChangePwd = this._onChangePwd.bind(this);
         this._login = this._login.bind(this);
+        this._getUserInfo = this._getUserInfo.bind(this);
     }
     toggleModal = () => {
         this.setState({ isModalVisible: !this.state.isModalVisible });
     };
-
     //获取输入账号
     _onChangeName(inputData){
         this.setState({
@@ -37,10 +39,9 @@ class Details extends Component {
             userPwd:inputData
         })
     }
-
     //登录
     _login(){
-        websock = new WebSocket(api.api);
+        websock = new WebSocket('ws://172.16.31.250:9009/');
         websock.onopen=()=>{
             var user = {
                 'astrAccountName':this.state.userName,
@@ -63,18 +64,37 @@ class Details extends Component {
             var user1=JSON.stringify(res.Data);
             //保存用户信息
             if (res != null) {
-                alert("登录成功"+this.state.userName)
+                var userInfo ={
+                    name:this.state.userName,
+                    pwd:this.state.userPwd
+                }
+                var jsonStr = JSON.stringify(userInfo);
+                AsyncStorage.setItem("user",jsonStr)
+                this.setState({ isModalVisible: false })
+                alert(this.state.wsOk)
             } else {
-                alert('请检查账号密码是否正确！')
+                alert(this.state.wsNo)
             }
         }
         websock.onerror=(e)=>{
-
         }
         websock.onclose=(e)=>{
-            alert("您连接的网络！不行呀！");
+            alert(this.state.wsClose);
         }
     }
+    //读取异步保存用户信息
+    _getUserInfo(){
+        const that = this
+        AsyncStorage.getItem('user', function (error, result) {
+            if (error) {
+                alert('读取失败')
+            }else {
+                const getName=JSON.parse(result);
+                that.setState({userName:getName.name})
+            }
+        })
+    }
+
 
     render() {
         return (

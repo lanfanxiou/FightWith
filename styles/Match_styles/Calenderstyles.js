@@ -27,7 +27,7 @@ const Calenderstyles =StyleSheet.create( {
     },
     tetsize:{
         color:'#ffffff',
-        fontSize:setSpText(30)
+        fontSize:setSpText(26)
     },
     viewDate:{
         width:scaleSizeW(160),
@@ -55,8 +55,9 @@ const Calenderstyles =StyleSheet.create( {
         backgroundColor: '#F5FCFF',
     },
     Cm_view1:{
+        backgroundColor: '#F5FCFF',
         width:width,
-        height:scaleSizeH(923)
+        height:scaleSizeH(850)
     },
     Cm_view2:{
         paddingVertical:scaleSizeW(25),
@@ -73,7 +74,7 @@ const Calenderstyles =StyleSheet.create( {
         paddingTop: 5,
         borderBottomWidth: 1,
         borderColor: '#eee',
-        height: 350
+        height: 360
     },
     text: {
         textAlign: 'center',

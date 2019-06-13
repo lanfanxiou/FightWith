@@ -3,6 +3,8 @@ import {View, Image, Text, StyleSheet, FlatList, ScrollView, Dimensions} from "r
 import styles from "../../styles/Home_styles/HomeStyle";
 import GetSurplusTime from "../../utils/GetSurplusTime";
 import {I18n} from "../../language/I18n";
+import * as time from '../../utils/time.js'//引用js
+var moment = require('moment');
 
 
 {/*展示页*/}
@@ -11,10 +13,13 @@ class Exhibition extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            cby:0,
+            cby:time.getTime,
             cbk:1,
             cbj:0,
         };
+    }
+    componentDidMount(){
+        alert(moment(time.getTime).format());
     }
 
     _renderItemArticle=({item})=>{
@@ -31,7 +36,7 @@ class Exhibition extends Component {
                 <View style={styles.cbeginsfa}>
                     <View style={styles.cbegins}>
 
-                        {this.state.cby==0?<Text style={styles.cbeginstxt}>
+                        {moment(this.state.cby)<moment('2019-09-16')?<Text style={styles.cbeginstxt}>
                             {I18n.t('Exhibition.Distance start')}<GetSurplusTime stringTime={item.StartDate} units={{
                             century:"世纪",	//“世纪”分隔符
                             year:"年",		//“年”分隔符
@@ -43,9 +48,9 @@ class Exhibition extends Component {
                         }} />
                         </Text> :null}
 
-                        {this.state.cbk==0?<Text style={styles.cbeginstxt}>赛事结束</Text> :null}
+                        {this.state.cby<item.StartDate?<Text style={styles.cbeginstxt}>赛事结束</Text> :null}
 
-                        {this.state.cbj==1?<Text style={styles.cbeginstxt}>直播中</Text> :null}
+                        {this.state.cby==item.StartDate?<Text style={styles.cbeginstxt}>直播中</Text> :null}
 
                     </View>
                     <View style={styles.cline}></View>

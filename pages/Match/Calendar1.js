@@ -118,9 +118,11 @@ class Calendar1 extends Component {
                                     [this.state.time2]: {marked: true, dotColor: 'red', activeOpacity: 0}
                                 }}
                             />
+                        </ScrollView>
+                        <View style={{paddingBottom:0}}>
                             <Text style={{fontSize:setSpText(19),color:"#CCCCCC"}}>红点:有比赛 蓝点:比赛推迟</Text>
                             <Button style={{marginBottom:0}} title={I18n.t('Match.btu')} onPress={this.toggleModal} />
-                        </ScrollView>
+                        </View>
                     </View>
                 </Modal>
             </View>

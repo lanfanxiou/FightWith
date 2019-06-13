@@ -13,6 +13,8 @@ myDate.toLocaleDateString();     //获取当前日期
 var mytime=myDate.toLocaleTimeString();     //获取当前时间
 myDate.toLocaleString( );        //获取日期与时间
 
+//获取年-月-日-时
+export const getDaytime=myDate.getFullYear()+'-'+(myDate.getMonth()+1)+'-'+(myDate.getDate())+' '+(myDate.getHours())+':'+(myDate.getMinutes())+':'+(myDate.getSeconds());
 //获取 月-日
 export const monthDay=(myDate.getMonth()+1)+'-'+(myDate.getDate());
 //获取 年-月-日

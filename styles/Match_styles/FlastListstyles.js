@@ -295,14 +295,12 @@ const FlastListstyles =StyleSheet.create( {
         backgroundColor:'#FF0000',
         marginLeft:scaleSizeW(10),
         flexDirection: 'row',
-        justifyContent: 'flex-start',
-        alignItems: 'center',
+        justifyContent: 'center',
+        alignItems: 'center' ,
     },
     mo_view3_2tet:{
         fontSize:setSpText(26),
         color:'#ffffff',
-        marginLeft:scaleSizeW(55),
-        marginRight:scaleSizeW(20)
     },
     mo_view3_3:{
         width:scaleSizeW(160),
@@ -313,14 +311,12 @@ const FlastListstyles =StyleSheet.create( {
         backgroundColor:'#FFFF00',
         marginLeft:scaleSizeW(10),
         flexDirection: 'row',
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
         alignItems: 'center',
     },
     mo_view3_3tet:{
         fontSize:setSpText(26),
         color:'#000000',
-        marginLeft:scaleSizeW(55),
-        marginRight:scaleSizeW(20)
     },
     mo_view3_4:{
         width:scaleSizeW(160),
@@ -331,14 +327,12 @@ const FlastListstyles =StyleSheet.create( {
         backgroundColor:'#085295',
         marginLeft:scaleSizeW(10),
         flexDirection: 'row',
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
         alignItems: 'center',
     },
     mo_view3_4tet:{
         fontSize:setSpText(26),
-        color:'#ffffff',
-        marginLeft:scaleSizeW(55),
-        marginRight:scaleSizeW(20)
+        color:'#ffffff'
 
     },
     square:{
@@ -371,6 +365,11 @@ const FlastListstyles =StyleSheet.create( {
         alignItems:'center',
         justifyContent:'center',
         width:scaleSizeW(200)
+    },
+    dropdown_coke:{
+        width:scaleSizeW(200),
+
+        height:scaleSizeH(250)
     },
     select_bycoke:{
         borderTopWidth:1,
