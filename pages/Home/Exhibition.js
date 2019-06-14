@@ -18,10 +18,6 @@ class Exhibition extends Component {
             cbj:0,
         };
     }
-    componentDidMount(){
-        alert(moment(time.getTime).format());
-    }
-
     _renderItemArticle=({item})=>{
         return (
 
