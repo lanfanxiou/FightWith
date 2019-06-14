@@ -423,7 +423,7 @@ class FlastList extends Component {
     }
     //测试确定按钮获取参数
 
-
+    // kjslkdjfkjdfkhsdlkflaksfdjaslkjdflkasjdlksjdflkjsadlkjflk
     //添加一条投票 测试成功
     addOneVote(){
         const data = {
