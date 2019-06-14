@@ -184,15 +184,19 @@ class FlastList extends Component {
     };
     //读取异步保存用户信息
     _getUserInfo(){
-        const that = this
-        AsyncStorage.getItem('user', function (error, result) {
-            if (error) {
-                alert('读取失败')
-            }else {
-                const getName=JSON.parse(result);
-                that.setState({userName:getName.name})
+        const that = this;
+        //获取异步缓存用户所有信息
+        AsyncStorage.getItem('userInfo', function (error, result) {
+            if (error) {}else {
+                const getInfo = JSON.parse(result);
+                if(getInfo==undefined){
+                    return;
+                }else {
+                    that.setState({userName:getInfo.AccountName})
+                }
             }
         })
+
     }
     _renderItemArticle=({item})=>{
         if(item.GameType==1){

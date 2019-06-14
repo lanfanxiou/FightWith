@@ -14,6 +14,7 @@ class Details extends Component {
         this.state = {
             userName:'',
             userPwd:'',
+            user:'',
             isModalVisible: false,
             wsOk:'登录成功',
             wsNo:'密码或账号不正确',
@@ -61,17 +62,13 @@ class Details extends Component {
             // 接收消息
             var data = JSON.parse(e.data);
             var res = JSON.parse(data.Message);
-            var user1=JSON.stringify(res.Data);
             //保存用户信息
-            if (res != null) {
-                var userInfo ={
-                    name:this.state.userName,
-                    pwd:this.state.userPwd
-                }
-                var jsonStr = JSON.stringify(userInfo);
-                AsyncStorage.setItem("user",jsonStr)
-                this.setState({ isModalVisible: false })
-                alert(this.state.wsOk)
+
+            if (res.Result != null) {
+                var jsonInfo = JSON.stringify(res.Result);
+                AsyncStorage.setItem("userInfo",jsonInfo);
+                this.setState({ isModalVisible: false ,user:this.state.userName})
+                //alert(this.state.wsOk)
             } else {
                 alert(this.state.wsNo)
             }
@@ -82,19 +79,26 @@ class Details extends Component {
             alert(this.state.wsClose);
         }
     }
+    componentDidMount() {
+        this._getUserInfo()
+    }
     //读取异步保存用户信息
     _getUserInfo(){
-        const that = this
-        AsyncStorage.getItem('user', function (error, result) {
-            if (error) {
-                alert('读取失败')
-            }else {
-                const getName=JSON.parse(result);
-                that.setState({userName:getName.name})
+        const that = this;
+        //获取异步缓存用户所有信息
+        AsyncStorage.getItem('userInfo', function (error, result) {
+            if (error) {}else {
+                const getInfo = JSON.parse(result);
+                if(getInfo==undefined){
+                    return;
+                }else {
+                    that.setState({userName:getInfo.AccountName,user:getInfo.AccountName})
+                }
+
             }
         })
-    }
 
+    }
 
     render() {
         return (
@@ -104,7 +108,9 @@ class Details extends Component {
                     <View style={styles.log} >
                         <Image style={styles.logimg} source={require('../../imagers/static/a1.png')}/>
                     </View>
+                    <Text style={{color:'#FFF'}}>{this.state.user}</Text>
                     <View style={styles.logUser}>
+
                         <TouchableOpacity onPress={this.toggleModal}>
                             <Image style={styles.userimg} source={require('../../imagers/static/index_user.png')}/>
                         </TouchableOpacity>
