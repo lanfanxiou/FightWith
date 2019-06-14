@@ -40,7 +40,8 @@ class AccordionTab extends Component {
                 var result = JSON.parse(message);
                 then.setState({
                     MatchList:result.Result
-                })
+                });
+                //alert(JSON.stringify(result.Result))
             }
         }
     };

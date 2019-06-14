@@ -63,7 +63,7 @@ class Details extends Component {
             var data = JSON.parse(e.data);
             var res = JSON.parse(data.Message);
             //保存用户信息
-
+            //alert(JSON.stringify(res))
             if (res.Result != null) {
                 var jsonInfo = JSON.stringify(res.Result);
                 AsyncStorage.setItem("userInfo",jsonInfo);

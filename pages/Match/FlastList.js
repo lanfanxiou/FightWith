@@ -5,7 +5,7 @@ import Modal from "react-native-modal";
 import {Actions} from "react-native-router-flux";
 import styles from "../../styles/Match_styles/FlastListstyles";
 import ModalDropdown from "react-native-modal-dropdown";
-import {getTime} from "../../utils/time";
+import * as time from '../../utils/time.js'//引用js
 
 
 
@@ -199,10 +199,10 @@ class FlastList extends Component {
 
     }
     _renderItemArticle=({item})=>{
-        if(item.GameType==1){
+        if(time.getTime01>(item.StartDate.substring(0,10))){
             this.setState({
                 overdate:item.StartDate,
-                overres:item.GameType ? "已结束" : "即将开始"
+                overres:"已结束"
             });
             return (
                 <TouchableOpacity onPress={this.toggleModal}>
@@ -243,7 +243,7 @@ class FlastList extends Component {
                     </View>
                 </TouchableOpacity>
             );
-        }else if(item.GameType !==1 && item.GameType !==0){
+        }else if(time.getTime01==(item.StartDate.substring(0,10))){
             this.setState({
                 Conductdate:item.StartDate,
                 Conductres:"进行中"
@@ -286,10 +286,10 @@ class FlastList extends Component {
                     </View>
                 </TouchableOpacity>
             );
-        }else if(item.GameType==0){
+        }else if(time.getTime01<(item.StartDate.substring(0,10))){
             this.setState({
                 soondate:item.StartDate,
-                soonres:item.GameType ? "已结束" : "即将开始"
+                soonres:"即将开始"
             });
             return (
                 <TouchableOpacity onPress={this.toggleModal3}>
@@ -338,7 +338,7 @@ class FlastList extends Component {
             resRed:'红',
             resYew:'平',
             resBlu:'蓝'
-        })
+        });
         this._getUserInfo();
     }
     _separator=()=>{
