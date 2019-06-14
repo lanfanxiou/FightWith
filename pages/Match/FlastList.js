@@ -48,7 +48,7 @@ class FlastList extends Component {
             ryb:3//比赛结果，123
         };
         this.toggleModal4 = this.toggleModal4.bind(this);
-        this._test = this._test.bind(this);
+        this.addOneVote = this.addOneVote.bind(this);
         this._initws = this._initws.bind(this);
         this._getUserInfo = this._getUserInfo.bind(this);
     }
@@ -422,8 +422,31 @@ class FlastList extends Component {
         }
     }
     //测试确定按钮获取参数
-    _test(){
-        alert(this.state.userName+this.state.getId+this.state.vote);
+
+    // kjslkdjfkjdfkhsdlkflaksfdjaslkjdflkasjdlksjdflkjsadlkjflk
+    //添加一条投票 测试成功
+    addOneVote(){
+        const data = {
+            "AccountName":this.state.userName,
+            "MethodID":this.state.getId,
+            "CompetitionID":this.state.vote
+        }
+        const str = JSON.stringify(data);
+        const action = {
+            "FromUser": "",
+            "Tag": "ac",
+            "Message": str,
+            "ActionMethod":"BetBLL.InsertBet"
+        };
+        alert(JSON.stringify(action));
+        var wss=new WebSocket("ws://172.16.31.250:9009/");
+        wss.onopen=function () {
+            wss.send(JSON.stringify(action))
+        }
+        wss.onmessage=function (ev) {
+            alert(ev.data);
+        }
+
         this.setState({
             tick:{
                 red:false, //red
@@ -434,7 +457,8 @@ class FlastList extends Component {
             isModalVisible2: false,
             isModalVisible3: false
         });
-    }
+    };
+
     render() {
         return (
             <View style={styles.box1}>
@@ -552,7 +576,7 @@ class FlastList extends Component {
                             <TouchableOpacity style={styles.select_bycoke_view1}>
                                 <TextInput editable={false} keyboardType="number-pad"  placeholderTextColor={'#FFF'} placeholder={'6-10'} maxLength={2}   style={styles.select_bycoke_view1_text}></TextInput>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.select_bycoke_view2} onPress={this._test}>
+                            <TouchableOpacity style={styles.select_bycoke_view2} onPress={this.addOneVote}>
                                 <Text style={styles.select_bycoke_view2_btn}>确定</Text>
                             </TouchableOpacity>
                         </View>
@@ -657,7 +681,7 @@ class FlastList extends Component {
                             <TouchableOpacity style={styles.select_bycoke_view1}>
                                 <TextInput editable={false} keyboardType="number-pad"  placeholderTextColor={'#FFF'} placeholder={'6-10'} maxLength={2}   style={styles.select_bycoke_view1_text}></TextInput>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.select_bycoke_view2} onPress={this._test}>
+                            <TouchableOpacity style={styles.select_bycoke_view2} onPress={this.addOneVote}>
                                 <Text style={styles.select_bycoke_view2_btn}>确定</Text>
                             </TouchableOpacity>
                         </View>
@@ -762,7 +786,7 @@ class FlastList extends Component {
                             <TouchableOpacity style={styles.select_bycoke_view1}>
                                 <TextInput editable={true} keyboardType="number-pad"  placeholderTextColor={'#FFF'} placeholder={'6-10'} maxLength={2}   style={styles.select_bycoke_view1_text}></TextInput>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.select_bycoke_view2} onPress={this._test}>
+                            <TouchableOpacity style={styles.select_bycoke_view2} onPress={this.addOneVote}>
                                 <Text style={styles.select_bycoke_view2_btn}>确定</Text>
                             </TouchableOpacity>
                         </View>

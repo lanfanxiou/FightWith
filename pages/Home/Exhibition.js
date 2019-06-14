@@ -13,7 +13,7 @@ class Exhibition extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            cby:time.getTime,
+            cby:time.getTime01,
             cbk:1,
             cbj:0,
         };
@@ -36,7 +36,7 @@ class Exhibition extends Component {
                 <View style={styles.cbeginsfa}>
                     <View style={styles.cbegins}>
 
-                        {moment(this.state.cby)<moment('2019-09-16')?<Text style={styles.cbeginstxt}>
+                        {this.state.cby<(item.StartDate.substring(0,10))?<Text style={styles.cbeginstxt}>
                             {I18n.t('Exhibition.Distance start')}<GetSurplusTime stringTime={item.StartDate} units={{
                             century:"世纪",	//“世纪”分隔符
                             year:"年",		//“年”分隔符
@@ -48,9 +48,9 @@ class Exhibition extends Component {
                         }} />
                         </Text> :null}
 
-                        {this.state.cby<item.StartDate?<Text style={styles.cbeginstxt}>赛事结束</Text> :null}
+                        {this.state.cby>(item.StartDate.substring(0,10))?<Text style={styles.cbeginstxt}>赛事结束</Text> :null}
 
-                        {this.state.cby==item.StartDate?<Text style={styles.cbeginstxt}>直播中</Text> :null}
+                        {this.state.cby==(item.StartDate.substring(0,10))?<Text style={styles.cbeginstxt}>直播中</Text> :null}
 
                     </View>
                     <View style={styles.cline}></View>

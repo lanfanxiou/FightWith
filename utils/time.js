@@ -20,6 +20,9 @@ export const monthDay=(myDate.getMonth()+1)+'-'+(myDate.getDate());
 //获取 年-月-日
 export const getTime=myDate.getFullYear()+'-'+(myDate.getMonth()+1)+'-'+(myDate.getDate());
 
+export const getTime01=myDate.getFullYear()+'-'+(Array(2).join(0) + (myDate.getMonth()+1)).slice(-2)+'-'+((Array(2).join(0) + (myDate.getDate())).slice(-2));
+
+
 // 日期时间脚本库方法列表
 // Date.prototype.isLeapYear 判断闰年
 // Date.prototype.Format 日期格式化
