@@ -25,6 +25,7 @@ class FlastList extends Component {
             isModalVisible3: false,
             overtitle:'秋名山巅峰对决',
             coketext:'游戏玩法',
+            forbidden:false,
             overdate:'',
             overres:'',
             Conductdate:'',
@@ -51,6 +52,7 @@ class FlastList extends Component {
         this.addOneVote = this.addOneVote.bind(this);
         this._initws = this._initws.bind(this);
         this._getUserInfo = this._getUserInfo.bind(this);
+        this.closeModel = this.closeModel.bind(this);
     }
 
     //切换标记
@@ -190,9 +192,10 @@ class FlastList extends Component {
             if (error) {}else {
                 const getInfo = JSON.parse(result);
                 if(getInfo==undefined){
+                    that.setState({forbidden:true});
                     return;
                 }else {
-                    that.setState({userName:getInfo.AccountName})
+                    that.setState({userName:getInfo.AccountName,forbidden:false})
                 }
             }
         })
@@ -430,27 +433,53 @@ class FlastList extends Component {
     // kjslkdjfkjdfkhsdlkflaksfdjaslkjdflkasjdlksjdflkjsadlkjflk
     //添加一条投票 测试成功
     addOneVote(){
-        const data = {
-            "AccountName":this.state.userName,
-            "MethodID":this.state.getId,
-            "CompetitionID":this.state.vote
-        }
-        const str = JSON.stringify(data);
-        const action = {
-            "FromUser": "",
-            "Tag": "ac",
-            "Message": str,
-            "ActionMethod":"BetBLL.InsertBet"
-        };
-        alert(JSON.stringify(action));
-        var wss=new WebSocket("ws://172.16.31.250:9009/");
-        wss.onopen=function () {
-            wss.send(JSON.stringify(action))
-        }
-        wss.onmessage=function (ev) {
-            alert(ev.data);
-        }
+        if(this.state.userName==''){
+            this.setState({
+                tick:{
+                    red:false, //red
+                    yellow:false, //yellow
+                    blue:false //blue
+                },
+                isModalVisible: false,
+                isModalVisible2: false,
+                isModalVisible3: false
+            });
+        }else {
+            const data = {
+                "AccountName":this.state.userName,
+                "MethodID":this.state.getId,
+                "CompetitionID":this.state.vote
+            }
+            const str = JSON.stringify(data);
+            const action = {
+                "FromUser": "",
+                "Tag": "ac",
+                "Message": str,
+                "ActionMethod":"BetBLL.InsertBet"
+            };
+            alert(JSON.stringify(action));
+            var wss=new WebSocket("ws://172.16.31.250:9009/");
+            wss.onopen=function () {
+                wss.send(JSON.stringify(action))
+            }
+            wss.onmessage=function (ev) {
+                alert(ev.data);
+            }
 
+            this.setState({
+                tick:{
+                    red:false, //red
+                    yellow:false, //yellow
+                    blue:false //blue
+                },
+                isModalVisible: false,
+                isModalVisible2: false,
+                isModalVisible3: false
+            });
+        }
+    };
+    //已经结束的 不用提交订单参数
+    closeModel(){
         this.setState({
             tick:{
                 red:false, //red
@@ -461,7 +490,7 @@ class FlastList extends Component {
             isModalVisible2: false,
             isModalVisible3: false
         });
-    };
+    }
 
     render() {
         return (
@@ -580,7 +609,7 @@ class FlastList extends Component {
                             <TouchableOpacity style={styles.select_bycoke_view1}>
                                 <TextInput editable={false} keyboardType="number-pad"  placeholderTextColor={'#FFF'} placeholder={'6-10'} maxLength={2}   style={styles.select_bycoke_view1_text}></TextInput>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.select_bycoke_view2} onPress={this.addOneVote}>
+                            <TouchableOpacity style={styles.select_bycoke_view2} onPress={()=>{this.setState({isModalVisible: false})}}>
                                 <Text style={styles.select_bycoke_view2_btn}>确定</Text>
                             </TouchableOpacity>
                         </View>
@@ -685,7 +714,7 @@ class FlastList extends Component {
                             <TouchableOpacity style={styles.select_bycoke_view1}>
                                 <TextInput editable={false} keyboardType="number-pad"  placeholderTextColor={'#FFF'} placeholder={'6-10'} maxLength={2}   style={styles.select_bycoke_view1_text}></TextInput>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.select_bycoke_view2} onPress={this.addOneVote}>
+                            <TouchableOpacity style={styles.select_bycoke_view2} onPress={()=>{this.setState({isModalVisible2: false})}}>
                                 <Text style={styles.select_bycoke_view2_btn}>确定</Text>
                             </TouchableOpacity>
                         </View>
